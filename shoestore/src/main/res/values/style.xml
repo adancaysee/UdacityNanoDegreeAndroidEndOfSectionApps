@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--TODO : I can't use buttonStyle-->
+    <style name="Widget.ShoeStore.Button" parent="Widget.MaterialComponents.Button">
+
+    </style>
+
+</resources>
