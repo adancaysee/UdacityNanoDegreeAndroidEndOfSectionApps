@@ -6,7 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentLoginBinding
 
@@ -21,11 +22,17 @@ class LoginFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
-        binding.btnResume.setOnClickListener(
-            Navigation.createNavigateOnClickListener(
-                LoginFragmentDirections.actionLoginFragmentToWelcomeFragment()
-            )
-        )
+        val loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+
+        binding.loginViewModel = loginViewModel
+
+        loginViewModel.eventLoginOrRegisterFinished.observe(viewLifecycleOwner) {
+            if (it) {
+
+                findNavController().navigate(LoginFragmentDirections.actionLoginDestinationToWelcomeDestination())
+                loginViewModel.onLoginOrRegisterFinishComplete()
+            }
+        }
 
         return binding.root
     }

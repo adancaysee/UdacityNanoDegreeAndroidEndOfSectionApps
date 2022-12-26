@@ -3,6 +3,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="login">Sign In</string>
+    <string name="register">Create Account</string>
+    <string name="title_login_fragment">Sign In</string>
+    <string name="title_fragment_welcome">Welcome</string>
+    <string name="welcome_msg">Welcome to Our App</string>
     <string name="resume">Resume</string>
+    <string name="go_to_shopping">Go to Shopping</string>
+    <string name="title_fragment_instructions">Instructions</string>
+    <string name="title_fragment_shoe_list">Shoes</string>
+    <string name="title_fragment_shoe_detail">Add New Shoe</string>
 </resources>
