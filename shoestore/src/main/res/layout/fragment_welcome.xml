@@ -14,14 +14,15 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center_horizontal"
-            android:contentDescription="@string/title_fragment_welcome"
+            android:contentDescription="@string/welcome"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_shoe_store"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintVertical_bias="0.2"
+            app:srcCompat="@drawable/ic_shoe_store"
+            app:tint="?attr/colorOnSurface" />
 
         <TextView
             android:layout_width="wrap_content"

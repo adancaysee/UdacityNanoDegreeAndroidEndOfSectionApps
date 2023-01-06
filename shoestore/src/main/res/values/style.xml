@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--TODO : I can't use buttonStyle-->
+
     <style name="Widget.ShoeStore.Button" parent="Widget.MaterialComponents.Button">
 
+    </style>
+
+    <style name="Widget.ShoeStore.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:paddingTop">@dimen/vertical_margin_half</item>
+        <item name="singleLine">false</item>
+        <item name="android:overScrollMode">always</item>
+        <item name="android:scrollbarStyle">insideInset</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#C1000E</item>
     </style>
 
 </resources>

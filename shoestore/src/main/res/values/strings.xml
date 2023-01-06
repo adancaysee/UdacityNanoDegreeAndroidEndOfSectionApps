@@ -1,16 +1,22 @@
 <resources>
     <string name="app_name">Shoe Store</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="login">Sign In</string>
+    <string name="sign_in">Sign In</string>
     <string name="register">Create Account</string>
-    <string name="title_login_fragment">Sign In</string>
-    <string name="title_fragment_welcome">Welcome</string>
+    <string name="welcome">Welcome</string>
     <string name="welcome_msg">Welcome to Our App</string>
     <string name="resume">Resume</string>
     <string name="go_to_shopping">Go to Shopping</string>
-    <string name="title_fragment_instructions">Instructions</string>
-    <string name="title_fragment_shoe_list">Shoes</string>
-    <string name="title_fragment_shoe_detail">Add New Shoe</string>
+    <string name="instructions">Instructions</string>
+    <string name="shoes">Shoes</string>
+    <string name="add_new_shoe">Add New Shoe</string>
+    <string name="logout">Logout</string>
+    <string name="add_shoe">Add Shoe</string>
+    <string name="cancel">Cancel</string>
+    <string name="shoe_name">Shoe Name</string>
+    <string name="company">Company</string>
+    <string name="size">Size</string>
+    <string name="description">Description</string>
+    <string name="error_msg_input_handling">All fields are required</string>
 </resources>

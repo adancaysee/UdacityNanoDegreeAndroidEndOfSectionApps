@@ -4,73 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".screens.login.LoginFragment">
 
-    <data>
-
-        <variable
-            name="loginViewModel"
-            type="com.udacity.shoestore.screens.login.LoginViewModel" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/horizontal_margin">
+        android:fillViewport="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout_email"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/btn_login"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.40">
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/horizontal_margin">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input_email"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email" />
+                android:layout_marginVertical="@dimen/vertical_margin"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/btn_login"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="0dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/text_input_layout_email"
-            app:layout_constraintStart_toStartOf="@id/text_input_layout_email"
-            app:layout_constraintTop_toBottomOf="@id/text_input_layout_email">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input_pass"
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/vertical_margin"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/vertical_margin"
-                android:hint="@string/password" />
+                android:text="@string/sign_in"
+                app:layout_constraintBottom_toTopOf="@id/btn_register" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/vertical_margin"
-            android:onClick="@{()->loginViewModel.onClickLoginOrRegister()}"
-            android:text="@string/login"
-            app:layout_constraintBottom_toTopOf="@id/btn_register" />
-
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{()->loginViewModel.onClickLoginOrRegister()}"
-            android:text="@string/register"
-            android:layout_marginBottom="@dimen/vertical_margin"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/vertical_margin"
+                android:text="@string/register"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

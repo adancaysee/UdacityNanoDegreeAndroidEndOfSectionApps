@@ -21,7 +21,7 @@ class WelcomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_welcome,container,false)
 
         binding.btnResume.setOnClickListener {
-            findNavController().navigate(WelcomeFragmentDirections.actionWelcomeDestinationToInstructionsFragment())
+            findNavController().navigate(WelcomeFragmentDirections.actionWelcomeDestinationToInstructionsDestination())
         }
 
         return binding.root
