@@ -37,8 +37,6 @@ class ShoeListFragment : Fragment(), MenuProvider {
             findNavController().navigate(ShoeListFragmentDirections.actionShoeListDestToShoeDetailDest())
         }
 
-
-
         mainViewModel.shoeList.observe(viewLifecycleOwner) { shoeList ->
             displayShoeList(shoeList)
         }
@@ -58,7 +56,6 @@ class ShoeListFragment : Fragment(), MenuProvider {
     private fun displayShoeItem(shoe: Shoe) {
         val itemViewBinding = ItemShoeBinding.inflate(LayoutInflater.from(requireActivity()))
         itemViewBinding.shoe = shoe
-        itemViewBinding.imageViewShoePicture.setImageResource(shoe.images[0])
         binding.layoutShoeList.addView(itemViewBinding.root)
     }
 

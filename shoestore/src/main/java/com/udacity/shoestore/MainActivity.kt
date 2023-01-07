@@ -25,8 +25,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.shoe_list_dest
             )
         )
-
-
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController,appBarConfiguration)
         //binding.toolbar.setupWithNavController(navController,appBarConfiguration)

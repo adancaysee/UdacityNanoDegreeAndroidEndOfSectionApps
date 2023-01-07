@@ -24,7 +24,7 @@
 
         <fragment
             android:id="@+id/welcome_destination"
-            android:name="com.udacity.shoestore.screens.title.WelcomeFragment"
+            android:name="com.udacity.shoestore.screens.onboarding.WelcomeFragment"
             android:label="@string/welcome"
             tools:layout="@layout/fragment_welcome">
             <action
@@ -38,7 +38,7 @@
 
         <fragment
             android:id="@+id/instructions_destination"
-            android:name="com.udacity.shoestore.screens.title.InstructionsFragment"
+            android:name="com.udacity.shoestore.screens.onboarding.InstructionsFragment"
             android:label="@string/instructions"
             tools:layout="@layout/fragment_instructions">
             <action

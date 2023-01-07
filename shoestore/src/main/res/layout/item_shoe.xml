@@ -40,6 +40,7 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/the_shoes_pictures"
                     android:scaleType="fitCenter"
+                    shoeImage="@{shoe}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

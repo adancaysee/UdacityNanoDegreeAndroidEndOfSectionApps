@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.StyleSpan
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.udacity.shoestore.model.Shoe
@@ -21,4 +22,9 @@ fun TextView.setShoeTitle(shoe:Shoe) {
     spannable.setSpan(boldSpan,0,shoe.company.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
     text = spannable
+}
+
+@BindingAdapter("shoeImage")
+fun ImageView.setShoeImage(shoe: Shoe) {
+    setImageResource(shoe.images[0])
 }

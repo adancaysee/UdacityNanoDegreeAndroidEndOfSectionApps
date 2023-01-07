@@ -1,4 +1,4 @@
-package com.udacity.shoestore.screens.title
+package com.udacity.shoestore.screens.onboarding
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
