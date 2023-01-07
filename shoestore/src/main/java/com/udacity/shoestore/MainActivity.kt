@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.udacity.shoestore.databinding.ActivityMainBinding
 import timber.log.Timber
 
@@ -15,17 +15,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         val navController = getNavController()
 
-        val appBarConfiguration = AppBarConfiguration
-            .Builder(
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
                 R.id.login_destination,
                 R.id.shoe_list_dest
-            ).build()
+            )
+        )
 
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setupWithNavController(navController,appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             Timber.tag("navigation").i(destination.label.toString())

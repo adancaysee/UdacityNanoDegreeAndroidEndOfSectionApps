@@ -6,6 +6,7 @@
     <item
         android:id="@+id/onboarding_graph"
         android:title="@string/logout"
+        app:iconTint="?attr/colorOnSurface"
         android:icon="@drawable/ic_baseline_logout_24"
         app:showAsAction="ifRoom" />
 </menu>
