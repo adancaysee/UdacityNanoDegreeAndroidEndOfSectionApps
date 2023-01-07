@@ -15,10 +15,9 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.331">
+            app:layout_constraintVertical_bias="0.33">
 
             <TextView
                 android:layout_width="match_parent"
@@ -33,11 +32,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/horizontal_margin"
                 android:layout_marginTop="64dp"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:lineSpacingExtra="@dimen/vertical_margin"
                 android:text="@string/instruction_screen_subtitle"
-                android:textAppearance="?attr/textAppearanceBody1"
-                android:fontFamily="sans-serif-light"/>
+                android:textAppearance="?attr/textAppearanceBody1" />
         </LinearLayout>
 
         <Button
