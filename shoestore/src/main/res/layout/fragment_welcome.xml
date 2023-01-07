@@ -20,19 +20,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintVertical_bias="0.25"
             app:srcCompat="@drawable/ic_shoe_store"
             app:tint="?attr/colorOnSurface" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/vertical_margin"
+            android:gravity="center"
             android:text="@string/welcome_msg"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            app:layout_constraintBottom_toTopOf="@+id/btn_resume"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.138" />
 
         <Button
             android:id="@+id/btn_resume"
@@ -41,7 +45,7 @@
             android:layout_marginStart="@dimen/horizontal_margin"
             android:layout_marginEnd="@dimen/horizontal_margin"
             android:layout_marginBottom="@dimen/vertical_margin"
-            android:text="Resume"
+            android:text="@string/resume"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

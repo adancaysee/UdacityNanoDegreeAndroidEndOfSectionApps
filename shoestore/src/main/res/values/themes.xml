@@ -6,27 +6,24 @@
         <item name="colorPrimaryVariant">@color/blue_700</item>
         <item name="colorOnPrimary">@color/white</item>
 
-        <item name="colorSecondary">@color/purple_500</item>
-        <item name="colorSecondaryVariant">@color/purple_700</item>
+        <item name="colorSecondary">@color/orange_500</item>
+        <item name="colorSecondaryVariant">@color/orange_700</item>
         <item name="colorOnSecondary">@color/white</item>
 
         <item name="android:statusBarColor" tools:targetApi="lollipop">?attr/colorPrimaryVariant
         </item>
 
-        <!--widget styles-->
+        <!--Widget styles-->
         <item name="textInputStyle">@style/Widget.ShoeStore.TextInput</item>
         <item name="materialButtonStyle">@style/Widget.ShoeStore.Button</item>
 
+        <!--Typography-->
+        <item name="textAppearanceHeadline2">@style/TextAppearance.ShoeStore.Headline2</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.ShoeStore.Headline5</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.ShoeStore.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.ShoeStore.Body2</item>
+
+
+
     </style>
-
-
-    <!--<item name="colorPrimary">@color/purple_500</item>
-    <item name="colorPrimaryVariant">@color/purple_700</item>
-    <item name="colorOnPrimary">@color/white</item>
-
-    <item name="colorSecondary">@color/teal_200</item>
-    <item name="colorSecondaryVariant">@color/teal_700</item>
-    <item name="colorOnSecondary">@color/black</item>-->
-
-
 </resources>

@@ -2,10 +2,11 @@ package com.udacity.shoestore.screens.shoe_list
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ScrollView
 import androidx.core.view.MenuHost
-import androidx.fragment.app.Fragment
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.udacity.shoestore.databinding.ItemShoeBinding
 import com.udacity.shoestore.model.Shoe
 import com.udacity.shoestore.screens.login.LoginFragmentDirections
 import com.udacity.shoestore.viewmodel.MainActivityViewModel
+
 
 class ShoeListFragment : Fragment(), MenuProvider {
 
@@ -50,11 +52,13 @@ class ShoeListFragment : Fragment(), MenuProvider {
         for (shoe in shoeList) {
             displayShoeItem(shoe)
         }
+        binding.scrollView.post { binding.scrollView.fullScroll(ScrollView.FOCUS_DOWN) }
     }
 
     private fun displayShoeItem(shoe: Shoe) {
         val itemViewBinding = ItemShoeBinding.inflate(LayoutInflater.from(requireActivity()))
         itemViewBinding.shoe = shoe
+        itemViewBinding.imageViewShoePicture.setImageResource(shoe.images[0])
         binding.layoutShoeList.addView(itemViewBinding.root)
     }
 

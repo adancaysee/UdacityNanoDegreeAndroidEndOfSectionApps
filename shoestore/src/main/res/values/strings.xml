@@ -7,7 +7,6 @@
     <string name="welcome">Welcome</string>
     <string name="welcome_msg">Welcome to Our App</string>
     <string name="resume">Resume</string>
-    <string name="go_to_shopping">Go to Shopping</string>
     <string name="instructions">Instructions</string>
     <string name="shoes">Shoes</string>
     <string name="add_new_shoe">Add New Shoe</string>
@@ -19,4 +18,8 @@
     <string name="size">Size</string>
     <string name="description">Description</string>
     <string name="error_msg_input_handling">All fields are required</string>
+    <string name="the_shoes_pictures">The Shoes\'s Pictures</string>
+    <string name="size_info">Size: %d</string>
+    <string name="instruction_screen_subtitle">With our application, you can view your products with one click and add new products easily.</string>
+    <string name="instruction_screen_title">Add Your Shoes Easily</string>
 </resources>
