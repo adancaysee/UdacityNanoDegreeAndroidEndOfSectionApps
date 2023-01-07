@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        setSupportActionBar(binding.toolbar)
         binding.toolbar.setupWithNavController(navController,appBarConfiguration)
+        setSupportActionBar(binding.toolbar)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             Timber.tag("navigation").i(destination.label.toString())
