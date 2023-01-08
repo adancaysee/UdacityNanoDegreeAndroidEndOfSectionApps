@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+With constraint layout, we can use Vertical_bias or Horizontal_bias. I can easily position my views on the screen
+Constraint layout -> parent
+  Linear Layout -> info content (I used Vertical_bias)
+    TextView
+    TextView
+  Button
+-->
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +17,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/horizontal_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +33,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/horizontal_margin"
                 android:gravity="center"
                 android:text="@string/instruction_screen_title"
                 android:textAppearance="?attr/textAppearanceHeadline2" />
@@ -30,7 +40,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/horizontal_margin"
                 android:layout_marginTop="64dp"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
@@ -43,8 +52,6 @@
             android:id="@+id/btn_resume"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/horizontal_margin"
-            android:layout_marginEnd="@dimen/horizontal_margin"
             android:layout_marginBottom="@dimen/vertical_margin"
             android:text="@string/resume"
             app:layout_constraintBottom_toBottomOf="parent"

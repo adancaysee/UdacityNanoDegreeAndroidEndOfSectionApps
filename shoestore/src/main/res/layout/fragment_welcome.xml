@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+I positioned my views at different points of the screen and it's easy with constraint layout
+Constraint layout -> parent
+  ImageView
+  TextView
+  Button
+-->
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -36,7 +45,7 @@
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.138" />
+            app:layout_constraintVertical_bias="0.14" />
 
         <Button
             android:id="@+id/btn_resume"

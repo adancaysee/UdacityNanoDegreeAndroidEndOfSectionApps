@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+I use linear layout here. Because my child views aligns in a single direction(vertical)
+-->
+
 <layout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
