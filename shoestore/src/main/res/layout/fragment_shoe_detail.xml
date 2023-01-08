@@ -17,6 +17,13 @@ Scrollview -> for keyboard scrolling
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".screens.shoe_detail.ShoeDetailFragment">
 
+    <data>
+
+        <variable
+            name="mainViewModel"
+            type="com.udacity.shoestore.viewmodel.MainActivityViewModel" />
+    </data>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,7 +56,8 @@ Scrollview -> for keyboard scrolling
                         android:id="@+id/input_shoe_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/shoe_name" />
+                        android:hint="@string/shoe_name"
+                        android:text="@={mainViewModel.shoeName}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -60,7 +68,8 @@ Scrollview -> for keyboard scrolling
                         android:id="@+id/input_company"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/company" />
+                        android:hint="@string/company"
+                        android:text="@={mainViewModel.shoeCompany}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -72,7 +81,8 @@ Scrollview -> for keyboard scrolling
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/size"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:text="@={mainViewModel.shoeSize}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -83,7 +93,8 @@ Scrollview -> for keyboard scrolling
                         android:id="@+id/input_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/description" />
+                        android:hint="@string/description"
+                        android:text="@={mainViewModel.shoeDescription}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -92,6 +103,7 @@ Scrollview -> for keyboard scrolling
                 android:id="@+id/btn_add_new_shoe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="@{()->mainViewModel.addNewShoe()}"
                 android:text="@string/add_shoe" />
 
             <Button

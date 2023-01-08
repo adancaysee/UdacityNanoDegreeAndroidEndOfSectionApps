@@ -25,9 +25,9 @@ class ShoeDetailFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_shoe_detail,container,false)
 
-        binding.btnAddNewShoe.setOnClickListener {
-            addNewShoe()
-        }
+        binding.mainViewModel = mainViewModel
+
+        binding.lifecycleOwner = this
 
         binding.btnCancel.setOnClickListener {
             findNavController().navigateUp()
@@ -44,16 +44,6 @@ class ShoeDetailFragment : Fragment() {
             mainViewModel.onEventAddNewShoeFinishCompleted()
         }
         return binding.root
-    }
-
-    private fun addNewShoe() {
-        val name = binding.inputShoeName.text.toString()
-        val company = binding.inputCompany.text.toString()
-        val size = binding.inputShoeSize.text.toString()
-        val description = binding.inputDescription.text.toString()
-
-        mainViewModel.addNewShoe(name = name,company = company, size = size, description = description)
-
     }
 
 }
