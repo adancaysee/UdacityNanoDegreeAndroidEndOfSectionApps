@@ -71,16 +71,6 @@
         android:name="com.udacity.shoestore.screens.shoe_detail.ShoeDetailFragment"
         android:label="@string/add_new_shoe"
         tools:layout="@layout/fragment_shoe_detail">
-        <action
-            android:id="@+id/action_shoe_detail_dest_to_shoe_list_dest"
-            app:destination="@id/shoe_list_dest"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/shoe_detail_dest"
-            app:popUpToInclusive="true"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <action

@@ -35,7 +35,7 @@ class ShoeDetailFragment : Fragment() {
         mainViewModel.eventAddNewShoeFinish.observe(viewLifecycleOwner) { uiState ->
             if (uiState == null) return@observe
             if (uiState.isSuccess) {
-                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailDestToShoeListDest())
+                findNavController().navigateUp()
             } else {
                 Toast.makeText(
                     requireActivity(),
