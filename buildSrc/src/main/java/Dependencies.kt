@@ -5,8 +5,26 @@ object Libraries {
     const val material = "com.google.android.material:material:1.7.0"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 
+    //Navigation
     const val androidxNavigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navVersion}"
     const val androidxNavigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navVersion}"
+
+
+    //Room
+    const val androidxRoomRuntime = "androidx.room:room-runtime:${Versions.roomVersion}"
+    const val androidxRoomCompiler = "androidx.room:room-compiler:${Versions.roomVersion}"
+    const val androidxRoomKtx = "androidx.room:room-ktx:${Versions.roomVersion}"
+
+    //Retrofit
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
+    const val retrofitMoshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofitVersion}"
+
+    //Moshi
+    const val moshi = "com.squareup.moshi:moshi:1.14.0"
+    const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:1.13.0"
+
+    //Coil
+    const val coil = "io.coil-kt:coil:1.1.1"
 
     const val timber = "com.jakewharton.timber:timber:5.0.1"
 
