@@ -18,6 +18,7 @@ object Libraries {
     //Retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
     const val retrofitMoshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofitVersion}"
+    const val retrofitScalarsConverter = "com.squareup.retrofit2:converter-scalars:${Versions.retrofitVersion}"
 
     //Moshi
     const val moshi = "com.squareup.moshi:moshi:1.14.0"

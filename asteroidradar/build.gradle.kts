@@ -5,14 +5,15 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs")
+    id("kotlin-parcelize")
 }
 
 android {
-    namespace = "com.example.asteroidradar"
+    namespace = "com.udacity.asteroidradar"
     compileSdk = Config.compileSdkVersion
 
     defaultConfig {
-        applicationId = "com.example.asteroidradar"
+        applicationId = "com.udacity.asteroidradar"
         minSdk = Config.minSdkVersion
         targetSdk = Config.targetSdkVersion
         versionCode = 1
@@ -55,6 +56,7 @@ dependencies {
 
     implementation(Libraries.moshiKotlin)
     implementation(Libraries.retrofitMoshiConverter)
+    implementation(Libraries.retrofitScalarsConverter)
     implementation(Libraries.coil)
 
     implementation(Libraries.androidxRoomRuntime)
