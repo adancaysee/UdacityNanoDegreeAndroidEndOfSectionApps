@@ -55,11 +55,12 @@ private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
         formattedDateList.add(dateFormat.format(currentTime))
         calendar.add(Calendar.DAY_OF_YEAR, 1)
     }
-
     return formattedDateList
 }
 
 fun getCurrentFormattedDate(): String =
     SimpleDateFormat(
         Constants.API_QUERY_DATE_FORMAT, Locale.getDefault()
-    ).format(System.currentTimeMillis())
+    ).format(Calendar.getInstance().time)
+
+

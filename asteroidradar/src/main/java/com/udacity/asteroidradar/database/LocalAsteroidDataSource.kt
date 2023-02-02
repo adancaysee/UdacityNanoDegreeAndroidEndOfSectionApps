@@ -13,10 +13,13 @@ interface LocalAsteroidDataSource {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: List<EntityAsteroid>)
 
-    @Query("SELECT * FROM asteroid_list_table where closeApproachDate >= :currentDate ORDER BY closeApproachDate ASC")
+    @Query("SELECT * FROM asteroid_list_table WHERE closeApproachDate >= :currentDate ORDER BY closeApproachDate ASC")
     fun getAllSortedAsteroids(currentDate: String = getCurrentFormattedDate()): LiveData<List<EntityAsteroid>>
 
     @Query("SELECT * FROM asteroid_list_table ORDER BY closeApproachDate ASC")
     fun getAllAsteroids(): LiveData<List<EntityAsteroid>>
+
+    @Query("DELETE FROM asteroid_list_table WHERE closeApproachDate < :endDate ")
+    fun deleteAsteroids(endDate: String)
 
 }

@@ -13,12 +13,13 @@ import com.udacity.asteroidradar.network.PictureOfDay
 import com.udacity.asteroidradar.repository.AsteroidRepository
 import com.udacity.asteroidradar.repository.NEoWsApiStatus
 import com.udacity.asteroidradar.repository.PictureOfDayRepository
+import com.udacity.asteroidradar.util.getCurrentFormattedDate
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val asteroidRepository: AsteroidRepository,
     private val pictureOfDayRepository: PictureOfDayRepository
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _navigateToDetailEvent = MutableLiveData<Asteroid?>()
     val navigateToDetailEvent: LiveData<Asteroid?>
@@ -53,7 +54,10 @@ class MainViewModel(
         viewModelScope.launch {
             _status.value = NEoWsApiStatus.Loading
             try {
-                asteroidRepository.fetchAsteroids()
+                asteroidRepository.refreshAsteroids(
+                    startDate = getCurrentFormattedDate(),
+                    endDate = null
+                )
                 _status.value = NEoWsApiStatus.Success
             } catch (e: Throwable) {
                 _status.value = NEoWsApiStatus.Failure(e.message ?: "Unknown error occurred")

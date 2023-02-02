@@ -30,7 +30,6 @@ class AsteroidRadarApplication : Application() {
     }
 
     private fun startRecurringWork() {
-
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
             .setRequiresCharging(true)
@@ -44,6 +43,12 @@ class AsteroidRadarApplication : Application() {
         val request = PeriodicWorkRequestBuilder<RefreshDataWorker>(1, TimeUnit.DAYS)
             .setConstraints(constraints)
             .build()
+
+
+        val configuration = Configuration.Builder()
+            .setWorkerFactory(RefreshDataWorker.Factory(appContainer.asteroidRepository))
+            .build()
+        WorkManager.initialize(this, configuration)
 
         WorkManager.getInstance(this).enqueueUniquePeriodicWork(
             RefreshDataWorker.WORK_NAME,
