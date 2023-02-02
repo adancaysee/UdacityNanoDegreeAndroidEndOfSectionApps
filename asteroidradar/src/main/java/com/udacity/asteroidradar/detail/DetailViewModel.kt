@@ -14,10 +14,22 @@ class DetailViewModel(selectedAsteroid: Asteroid) : ViewModel() {
     val asteroid: LiveData<Asteroid>
         get() = _asteroid
 
+    private val _displayAstronomicalUnitExplanationEvent = MutableLiveData<Boolean>()
+    val displayAstronomicalUnitExplanationEvent: LiveData<Boolean>
+        get() = _displayAstronomicalUnitExplanationEvent
+
+
     init {
         _asteroid.value = selectedAsteroid
     }
 
+    fun onDisplayAstronomicalUnitExplanation() {
+        _displayAstronomicalUnitExplanationEvent.value = true
+    }
+
+    fun doneDisplayAstronomicalUnitExplanation() {
+        _displayAstronomicalUnitExplanationEvent.value = false
+    }
 
     companion object {
         fun createFactory(asteroid: Asteroid): ViewModelProvider.Factory {

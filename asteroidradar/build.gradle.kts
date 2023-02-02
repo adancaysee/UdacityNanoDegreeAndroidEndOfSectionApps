@@ -63,6 +63,8 @@ dependencies {
     implementation(Libraries.androidxRoomKtx)
     kapt(Libraries.androidxRoomCompiler)
 
+    implementation(Libraries.workManagerKtx)
+
     implementation(Libraries.timber)
 
     testImplementation(TestLibraries.junit)

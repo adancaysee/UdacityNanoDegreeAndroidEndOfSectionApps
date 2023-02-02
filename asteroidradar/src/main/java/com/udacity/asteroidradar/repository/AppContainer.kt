@@ -5,16 +5,21 @@ import com.udacity.asteroidradar.database.AsteroidRadarDatabase
 import com.udacity.asteroidradar.network.NEoWsApi
 
 interface AppContainer {
-    val repository: AsteroidRepository
+    val asteroidRepository: AsteroidRepository
+    val pictureOfDayRepository: PictureOfDayRepository
 }
 
 class DefaultAppContainer(context: Context) : AppContainer {
 
-    override val repository: AsteroidRepository by lazy {
+    override val asteroidRepository: AsteroidRepository by lazy {
         DefaultAsteroidRepository(
             NEoWsApi.remoteAsteroidDataSource,
-            NEoWsApi.remotePictureOfDayDataSource,
             AsteroidRadarDatabase.getInstance(context).localAsteroidDataSource
+        )
+    }
+    override val pictureOfDayRepository: PictureOfDayRepository by lazy {
+        DefaultPictureOfDayRepository(
+            NEoWsApi.remotePictureOfDayDataSource
         )
     }
 

@@ -27,6 +27,10 @@ object Libraries {
     //Coil
     const val coil = "io.coil-kt:coil:1.1.1"
 
+    //Work Manager
+    const val workManagerKtx = "androidx.work:work-runtime-ktx:${Versions.workVersion}"
+
+
     const val timber = "com.jakewharton.timber:timber:5.0.1"
 
 }

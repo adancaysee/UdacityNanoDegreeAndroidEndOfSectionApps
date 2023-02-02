@@ -21,12 +21,11 @@ sealed class NEoWsApiStatus {
 
 class DefaultAsteroidRepository(
     private val remoteAsteroidDataSource: RemoteAsteroidDataSource,
-    private val remotePictureOfDayDataSource: RemotePictureOfDayDataSource,
     private val localAsteroidDataSource: LocalAsteroidDataSource
 ) : AsteroidRepository {
 
     override val asteroids: LiveData<List<Asteroid>> =
-        Transformations.map(localAsteroidDataSource.getAllAsteroids()) {
+        Transformations.map(localAsteroidDataSource.getAllSortedAsteroids()) {
             it.asDomain()
         }
 
@@ -38,10 +37,6 @@ class DefaultAsteroidRepository(
         }
     }
 
-    override suspend fun getPictureOfDay(): PictureOfDay {
-        return withContext(Dispatchers.IO) {
-            remotePictureOfDayDataSource.getPictureOfDay()
-        }
-    }
+
 
 }
