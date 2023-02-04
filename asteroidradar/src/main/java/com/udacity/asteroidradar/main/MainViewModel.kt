@@ -74,7 +74,6 @@ class MainViewModel(
         _navigateToDetailEvent.value = null
     }
 
-
     companion object {
         val Factory = viewModelFactory {
             initializer {

@@ -30,6 +30,7 @@ class MainFragment : Fragment() {
                 adapter.submitList(it)
             }
         }
+
         binding.asteroidRecycler.adapter = adapter
 
         viewModel.navigateToDetailEvent.observe(viewLifecycleOwner) {

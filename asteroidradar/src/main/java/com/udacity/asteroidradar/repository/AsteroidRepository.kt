@@ -2,8 +2,8 @@ package com.udacity.asteroidradar.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.udacity.asteroidradar.database.LocalAsteroidDataSource
-import com.udacity.asteroidradar.database.asDomain
+import com.udacity.asteroidradar.database.dao.LocalAsteroidDataSource
+import com.udacity.asteroidradar.database.entity.asDomain
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.asDatabase
 import com.udacity.asteroidradar.network.*
@@ -39,7 +39,7 @@ class DefaultAsteroidRepository(
 
     override suspend fun deletePreviousAsteroids(endDate: String) {
         withContext(Dispatchers.IO) {
-            localAsteroidDataSource.deleteAsteroids(endDate)
+            localAsteroidDataSource.deletePreviousAsteroids(endDate)
         }
     }
 }

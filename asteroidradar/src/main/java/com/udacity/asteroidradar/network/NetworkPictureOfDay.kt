@@ -1,7 +1,7 @@
 package com.udacity.asteroidradar.network
 
 import com.squareup.moshi.Json
-import com.udacity.asteroidradar.database.EntityPictureOfDay
+import com.udacity.asteroidradar.database.entity.EntityPictureOfDay
 import com.udacity.asteroidradar.domain.PictureOfDay
 
 data class NetworkPictureOfDay(

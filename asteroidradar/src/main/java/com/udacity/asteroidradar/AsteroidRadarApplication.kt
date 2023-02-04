@@ -26,7 +26,6 @@ class AsteroidRadarApplication : Application() {
         applicationScope.launch {
             startRecurringWork()
         }
-
     }
 
     private fun startRecurringWork() {
@@ -44,7 +43,6 @@ class AsteroidRadarApplication : Application() {
             .setConstraints(constraints)
             .build()
 
-
         val configuration = Configuration.Builder()
             .setWorkerFactory(RefreshDataWorker.Factory(appContainer.asteroidRepository))
             .build()
@@ -55,7 +53,5 @@ class AsteroidRadarApplication : Application() {
             ExistingPeriodicWorkPolicy.KEEP,
             request
         )
-
-
     }
 }

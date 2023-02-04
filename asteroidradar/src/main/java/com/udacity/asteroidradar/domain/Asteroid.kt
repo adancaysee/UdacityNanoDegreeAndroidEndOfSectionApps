@@ -1,7 +1,7 @@
 package com.udacity.asteroidradar.domain
 
 import android.os.Parcelable
-import com.udacity.asteroidradar.database.EntityAsteroid
+import com.udacity.asteroidradar.database.entity.EntityAsteroid
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

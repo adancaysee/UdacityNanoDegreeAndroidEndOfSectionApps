@@ -1,7 +1,7 @@
 package com.udacity.asteroidradar.repository
 
-import com.udacity.asteroidradar.database.LocalPictureOfDayDataSource
-import com.udacity.asteroidradar.database.asDomain
+import com.udacity.asteroidradar.database.dao.LocalPictureOfDayDataSource
+import com.udacity.asteroidradar.database.entity.asDomain
 import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.network.RemotePictureOfDayDataSource
 import com.udacity.asteroidradar.network.asDatabase

@@ -30,8 +30,8 @@ class AsteroidListAdapter(
         }
     }
 
-
     companion object DiffCallback : DiffUtil.ItemCallback<Asteroid>() {
+
         override fun areItemsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
             return oldItem.id == newItem.id
         }
@@ -39,7 +39,6 @@ class AsteroidListAdapter(
         override fun areContentsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
             return oldItem == newItem
         }
-
     }
 
     class ItemClickListener(private val onItemClick: (Asteroid) -> Unit) {

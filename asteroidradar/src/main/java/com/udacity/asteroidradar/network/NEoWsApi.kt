@@ -22,7 +22,6 @@ private val retrofitWithMoshi: Retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .build()
 
-
 object NEoWsApi {
     val remoteAsteroidDataSource: RemoteAsteroidDataSource by lazy {
         retrofitWithScalar.create(RemoteAsteroidDataSource::class.java)

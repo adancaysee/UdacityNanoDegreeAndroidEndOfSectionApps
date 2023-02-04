@@ -37,7 +37,6 @@ class DetailFragment : Fragment() {
         binding.viewModel = detailViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-
         return binding.root
     }
 
