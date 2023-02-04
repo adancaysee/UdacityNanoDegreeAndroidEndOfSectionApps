@@ -9,7 +9,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.udacity.asteroidradar.AsteroidRadarApplication
 import com.udacity.asteroidradar.domain.Asteroid
-import com.udacity.asteroidradar.network.PictureOfDay
+import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.repository.AsteroidRepository
 import com.udacity.asteroidradar.repository.NEoWsApiStatus
 import com.udacity.asteroidradar.repository.PictureOfDayRepository

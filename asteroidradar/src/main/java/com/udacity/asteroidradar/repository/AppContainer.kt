@@ -19,7 +19,8 @@ class DefaultAppContainer(context: Context) : AppContainer {
     }
     override val pictureOfDayRepository: PictureOfDayRepository by lazy {
         DefaultPictureOfDayRepository(
-            NEoWsApi.remotePictureOfDayDataSource
+            NEoWsApi.remotePictureOfDayDataSource,
+            AsteroidRadarDatabase.getInstance(context).localPictureOfDayDataSource
         )
     }
 

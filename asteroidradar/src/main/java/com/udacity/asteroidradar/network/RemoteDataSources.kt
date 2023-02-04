@@ -18,5 +18,5 @@ interface RemoteAsteroidDataSource {
 
 interface RemotePictureOfDayDataSource {
     @GET("planetary/apod")
-    suspend fun getPictureOfDay(@Query("api_key") apiKey: String = API_KEY): PictureOfDay
+    suspend fun getPictureOfDay(@Query("api_key") apiKey: String = API_KEY): NetworkPictureOfDay
 }
