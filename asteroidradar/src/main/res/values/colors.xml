@@ -7,5 +7,6 @@
     <color name="text_grey">#D2D2D2</color>
     <color name="app_background">#010613</color>
     <color name="potentially_hazardous">?attr/colorSecondary</color>
+    <color name="background_image_of_day">#55010613</color>
 
 </resources>

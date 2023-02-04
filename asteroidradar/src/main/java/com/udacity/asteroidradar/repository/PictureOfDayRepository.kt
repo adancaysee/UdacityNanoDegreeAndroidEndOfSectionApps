@@ -23,8 +23,12 @@ class DefaultPictureOfDayRepository(
         return withContext(Dispatchers.IO) {
             try {
                 val picture = remotePictureOfDayDataSource.getPictureOfDay()
-                localPictureOfDayDataSource.insert(picture.asDatabase())
-                picture.asDomain()
+                if (picture.mediaType == "image") {
+                    localPictureOfDayDataSource.insert(picture.asDatabase())
+                    picture.asDomain()
+                }else {
+                    null
+                }
             }catch (ex:Exception) {
                 val picture = localPictureOfDayDataSource.getPictureOfDay()
                 picture?.asDomain()
