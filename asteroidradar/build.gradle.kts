@@ -6,6 +6,7 @@ plugins {
     id("kotlin-kapt")
     id("androidx.navigation.safeargs")
     id("kotlin-parcelize")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {

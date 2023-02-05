@@ -1,13 +1,13 @@
 package com.udacity.asteroidradar.network
 
-import com.udacity.asteroidradar.util.Constants.API_KEY
+import com.udacity.asteroidradar.BuildConfig
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RemoteAsteroidDataSource {
     @GET("neo/rest/v1/feed")
     suspend fun getAsteroids(
-        @Query("api_key") apiKey: String = API_KEY,
+        @Query("api_key") apiKey: String = BuildConfig.NASA_API_KEY,
         @Query("start_date") startDate: String?,
         @Query("end_date") endDate: String?,
     ): String
@@ -15,5 +15,5 @@ interface RemoteAsteroidDataSource {
 
 interface RemotePictureOfDayDataSource {
     @GET("planetary/apod")
-    suspend fun getPictureOfDay(@Query("api_key") apiKey: String = API_KEY): NetworkPictureOfDay
+    suspend fun getPictureOfDay(@Query("api_key") apiKey: String = BuildConfig.NASA_API_KEY): NetworkPictureOfDay
 }

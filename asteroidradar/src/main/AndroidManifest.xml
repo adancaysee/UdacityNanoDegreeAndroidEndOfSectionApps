@@ -21,6 +21,11 @@
             </intent-filter>
         </activity>
 
+        <meta-data
+            android:name="NASA_API_KEY"
+            android:value="${NASA_API_KEY}">
+
+        </meta-data>
 
         <provider
             android:name="androidx.startup.InitializationProvider"
