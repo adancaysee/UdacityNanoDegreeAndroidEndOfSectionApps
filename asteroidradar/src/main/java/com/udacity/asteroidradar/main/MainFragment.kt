@@ -34,6 +34,7 @@ class MainFragment : Fragment(), MenuProvider {
         viewModel.asteroids.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.submitList(it)
+                binding.asteroidRecycler.scrollToPosition(0)
             }
         }
 
