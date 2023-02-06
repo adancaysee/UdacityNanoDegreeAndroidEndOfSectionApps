@@ -9,7 +9,7 @@ import com.udacity.asteroidradar.database.dao.LocalPictureOfDayDataSource
 import com.udacity.asteroidradar.database.entity.EntityAsteroid
 import com.udacity.asteroidradar.database.entity.EntityPictureOfDay
 
-@Database(entities = [EntityAsteroid::class, EntityPictureOfDay::class], version = 2, exportSchema = false)
+@Database(entities = [EntityAsteroid::class, EntityPictureOfDay::class], version = 3, exportSchema = false)
 abstract class AsteroidRadarDatabase : RoomDatabase() {
 
     abstract val localAsteroidDataSource: LocalAsteroidDataSource

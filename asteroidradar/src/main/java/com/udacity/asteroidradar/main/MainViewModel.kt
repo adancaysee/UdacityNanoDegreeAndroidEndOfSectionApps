@@ -15,7 +15,9 @@ import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.repository.AsteroidRepository
 import com.udacity.asteroidradar.repository.NEoWsApiStatus
+import com.udacity.asteroidradar.repository.NEoWsAsteroidFilter
 import com.udacity.asteroidradar.repository.PictureOfDayRepository
+import com.udacity.asteroidradar.util.Constants
 import com.udacity.asteroidradar.util.getCurrentFormattedDate
 import kotlinx.coroutines.launch
 
@@ -68,15 +70,22 @@ class MainViewModel(
             try {
                 asteroidRepository.refreshAsteroids(
                     startDate = getCurrentFormattedDate(),
-                    endDate = null
+                    endDate = getCurrentFormattedDate(Constants.DEFAULT_END_DATE_DAYS)
                 )
                 _status.value = NEoWsApiStatus.Success
             } catch (e: Throwable) {
                 _status.value = NEoWsApiStatus.Failure(e.message ?: "Unknown error occurred")
             }
         }
+    }
+
+    fun filterAsteroids(filter: NEoWsAsteroidFilter) {
+        viewModelScope.launch {
+            asteroidRepository.filterAsteroids(filter)
+        }
 
     }
+
 
     fun onNavigateToDetail(asteroid: Asteroid) {
         _navigateToDetailEvent.value = asteroid
