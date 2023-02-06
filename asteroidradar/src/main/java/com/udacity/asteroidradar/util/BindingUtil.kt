@@ -8,6 +8,7 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import coil.load
 import com.udacity.asteroidradar.R
+import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.repository.NEoWsApiStatus
 
 @BindingAdapter("statusIcon")
@@ -59,6 +60,20 @@ fun bindApiStatus(progressBar: ProgressBar, status: NEoWsApiStatus?) {
             progressBar.visibility = View.VISIBLE
         }
         else -> progressBar.visibility = View.GONE
+    }
+}
+
+@BindingAdapter("pictureOfDayUrl")
+fun bindPictureOfDay(imageView: ImageView, pictureOfDay: PictureOfDay?) {
+    val context = imageView.context
+    pictureOfDay?.let {
+        if (it.mediaType == "image") {
+            bindImageUrl(imageView,it.url)
+            context.getString(R.string.nasa_picture_of_day_content_description_format, it.title)
+        } else {
+            imageView.setImageResource(R.drawable.image_not_found_icon)
+            context.getString(R.string.this_is_nasa_s_picture_of_day_showing_nothing_yet)
+        }
     }
 }
 
