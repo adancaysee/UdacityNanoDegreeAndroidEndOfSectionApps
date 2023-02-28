@@ -16,3 +16,4 @@ rootProject.name = "UdacityNanoDegreeAndroidEndOfSectionApps"
 include ':app'
 include ':shoestore'
 include ':asteroidradar'
+include ':loadapp'
