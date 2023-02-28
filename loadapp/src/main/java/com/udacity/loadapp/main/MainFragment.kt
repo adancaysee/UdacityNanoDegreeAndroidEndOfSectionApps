@@ -1,11 +1,14 @@
 package com.udacity.loadapp.main
 
+import android.app.DownloadManager
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.loadapp.R
@@ -19,6 +22,8 @@ class MainFragment : Fragment() {
     }
     private lateinit var binding: FragmentMainBinding
 
+    private val receiver = DownloadCompleteReceiver()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,9 +33,33 @@ class MainFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+
+        requireActivity().registerReceiver(
+            receiver,
+            IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+        )
+
         viewModel.radioGroupList.observe(viewLifecycleOwner) {
             it?.let {
                 createRadioGroupList(it)
+            }
+        }
+
+        viewModel.emptySelectionEvent.observe(viewLifecycleOwner) {
+            if (it == true) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.emty_selection_warning),
+                    Toast.LENGTH_LONG
+                ).show()
+                viewModel.doneEmptySelectionEvent()
+            }
+        }
+
+        viewModel.buttonState.observe(viewLifecycleOwner) {
+            it?.let {
+
+                Toast.makeText(requireContext(), "Resume", Toast.LENGTH_LONG).show()
             }
         }
 

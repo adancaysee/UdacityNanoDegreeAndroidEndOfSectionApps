@@ -13,4 +13,5 @@
     <string name="title_fragment_detail">Loading Status</string>
     <string name="cloud_placeholder">Cloud placeholder</string>
     <string name="download">Download</string>
+    <string name="emty_selection_warning">Please select the file to download</string>
 </resources>
