@@ -3,7 +3,6 @@ package com.udacity.loadapp.main
 import android.app.Application
 import android.app.DownloadManager
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -37,7 +36,7 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
     val radioGroupList: LiveData<List<DownloadInfo>>
         get() = _radioGroupList
 
-    private var selectedUrl: String? = null
+    private var selectedDownloadInfo: DownloadInfo? = null
 
     private val _buttonState = MutableLiveData<ButtonState>()
     val buttonState: LiveData<ButtonState>
@@ -51,26 +50,22 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
 
     fun onCheckedChanged(checkedId: Int) {
         val info = list[checkedId - 1]
-        selectedUrl = info.url
+        selectedDownloadInfo = info
     }
 
     fun downloadFromUrl() {
-        if (selectedUrl == null) {
+        if (selectedDownloadInfo == null) {
             _emptySelectionEvent.value = true
             return
         }
         _buttonState.value = ButtonState.Clicked
 
-        val request = DownloadManager.Request(Uri.parse(selectedUrl))
-            .setTitle(application.getString(R.string.app_name))
+        val request = DownloadManager.Request(Uri.parse(selectedDownloadInfo!!.url))
+            .setTitle(selectedDownloadInfo!!.title)
             .setDescription(application.getString(R.string.app_description))
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-
         try {
             downloadID = getDownloadManager(application.applicationContext).enqueue(request)
-            Log.e("","")
-        }catch (ex:Exception) {
-            Log.e("ex",ex.message.toString())
+        } catch (_: Exception) {
         }
     }
 

@@ -10,9 +10,9 @@
         <item name="colorSecondaryVariant">@color/orange_500</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="lollipop">?attr/colorPrimaryVariant
-        </item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="colorTertiary">@color/textColorGray</item>
     </style>
 
     <style name="Theme.LoadApp.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
