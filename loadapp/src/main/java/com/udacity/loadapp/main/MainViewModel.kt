@@ -49,7 +49,7 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
     private var downloadID: Long = 0
 
     fun onCheckedChanged(checkedId: Int) {
-        val info = list[checkedId - 1]
+        val info = list[checkedId]
         selectedDownloadInfo = info
     }
 

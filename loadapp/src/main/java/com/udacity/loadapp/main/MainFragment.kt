@@ -59,13 +59,14 @@ class MainFragment : Fragment() {
     }
 
     private fun createRadioGroupList(list: List<DownloadInfo>) {
-        for (info in list) {
+        for ((index, info) in list.withIndex()) {
             val button = RadioButton(requireContext())
             button.text = info.title
             button.setTextSize(
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.default_text)
             )
+            button.id = index
             button.setPadding(0, 0, 0, resources.getDimension(R.dimen.spacing_16dp).toInt())
             binding.radioGroup.addView(button)
         }
