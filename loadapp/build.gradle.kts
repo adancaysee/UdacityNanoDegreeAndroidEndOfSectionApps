@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.udacity.loadapp"
-        minSdk = Config.minSdkVersion
+        minSdk = 23
         targetSdk = Config.targetSdkVersion
         versionCode = 1
         versionName = "1.0"

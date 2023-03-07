@@ -37,17 +37,15 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
-        <Button
+        <com.udacity.loadapp.util.LoadingButton
             android:id="@+id/button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginHorizontal="@dimen/spacing_16dp"
             android:layout_marginBottom="@dimen/spacing_16dp"
-            android:padding="12dp"
+            android:background="?attr/colorPrimary"
             android:onClick="@{() -> viewModel.downloadFromUrl()}"
-            android:text="@string/download"
-            android:textAllCaps="false"
-            android:textSize="@dimen/default_text"
+            app:text="@string/download"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

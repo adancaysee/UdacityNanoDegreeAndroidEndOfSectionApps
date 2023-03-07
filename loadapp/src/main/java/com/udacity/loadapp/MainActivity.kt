@@ -4,7 +4,6 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.databinding.DataBindingUtil
 import com.udacity.loadapp.databinding.ActivityMainBinding
 import com.udacity.loadapp.util.hasNotificationPermission
 
@@ -14,11 +13,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         setSupportActionBar(binding.toolbar)
 
         requestNotificationPermission()
-
     }
 
     private fun requestNotificationPermission() {
@@ -31,5 +31,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }
