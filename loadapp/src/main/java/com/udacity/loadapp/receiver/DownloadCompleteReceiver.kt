@@ -1,4 +1,4 @@
-package com.udacity.loadapp.util
+package com.udacity.loadapp.receiver
 
 import android.annotation.SuppressLint
 import android.app.DownloadManager
@@ -7,9 +7,13 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
-import com.LoadAppApplication
-import com.udacity.DownloadStatus
+import com.udacity.loadapp.LoadAppApplication
+import com.udacity.loadapp.repository.DownloadStatus
 import com.udacity.loadapp.R
+import com.udacity.loadapp.util.cancelAllNotifications
+import com.udacity.loadapp.util.getDownloadManager
+import com.udacity.loadapp.util.getNotificationManager
+import com.udacity.loadapp.util.sendDownloadCompletedNotification
 
 class DownloadCompleteReceiver : BroadcastReceiver() {
 
@@ -42,7 +46,7 @@ class DownloadCompleteReceiver : BroadcastReceiver() {
 
             getNotificationManager(context).cancelAllNotifications()
 
-            getNotificationManager(context).sendNotification(
+            getNotificationManager(context).sendDownloadCompletedNotification(
                 context,
                 context.getString(R.string.notification_title),
                 context.getString(R.string.notification_description, fileName),

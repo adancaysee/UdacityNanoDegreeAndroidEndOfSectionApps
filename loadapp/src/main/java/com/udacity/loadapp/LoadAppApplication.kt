@@ -1,8 +1,7 @@
-package com
+package com.udacity.loadapp
 
 import android.app.Application
-import com.udacity.DownloadFileRepository
-import com.udacity.loadapp.R
+import com.udacity.loadapp.repository.DownloadFileRepository
 import com.udacity.loadapp.util.createDownloadCompletedNotificationChannel
 import com.udacity.loadapp.util.getNotificationManager
 import timber.log.Timber

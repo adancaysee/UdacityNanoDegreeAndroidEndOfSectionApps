@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.loadapp.R
 import com.udacity.loadapp.databinding.FragmentMainBinding
-import com.udacity.loadapp.util.DownloadCompleteReceiver
+import com.udacity.loadapp.receiver.DownloadCompleteReceiver
 
 class MainFragment : Fragment() {
 

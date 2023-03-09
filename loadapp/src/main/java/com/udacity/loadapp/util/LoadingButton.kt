@@ -8,7 +8,6 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.databinding.BindingAdapter
-import com.udacity.loadapp.ButtonState
 import com.udacity.loadapp.R
 import timber.log.Timber
 import kotlin.math.abs
@@ -21,7 +20,7 @@ class LoadingButton @JvmOverloads constructor(
 
     private var centerPointF: PointF = PointF()
 
-    private val paint = Paint().apply {
+    private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.WHITE
         textSize = resources.getDimension(R.dimen.default_text)
         textAlign = Paint.Align.CENTER
@@ -68,14 +67,6 @@ class LoadingButton @JvmOverloads constructor(
         paint.getTextBounds(text.uppercase(), 0, text.length, rect)
         textHeight = rect.height().toFloat()
         textWidth = paint.measureText(text)
-    }
-
-    private fun startAnimation() {
-        loadingAnimator?.start()
-    }
-
-    private fun stopAnimation() {
-        loadingAnimator?.end()
     }
 
     init {
@@ -151,6 +142,14 @@ class LoadingButton @JvmOverloads constructor(
                 repeatMode = ValueAnimator.RESTART
             }
         }
+    }
+
+    private fun startAnimation() {
+        loadingAnimator?.start()
+    }
+
+    private fun stopAnimation() {
+        loadingAnimator?.end()
     }
 
     fun setState(buttonState: ButtonState) {

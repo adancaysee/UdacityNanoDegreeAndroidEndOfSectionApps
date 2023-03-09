@@ -16,7 +16,7 @@ import com.udacity.loadapp.R
 
 private const val NOTIFICATION_ID = 0
 
-fun NotificationManager.sendNotification(
+fun NotificationManager.sendDownloadCompletedNotification(
     context: Context,
     title: String,
     body: String,

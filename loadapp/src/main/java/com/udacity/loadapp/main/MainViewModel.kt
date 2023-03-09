@@ -8,10 +8,10 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.LoadAppApplication
-import com.udacity.DownloadFileRepository
-import com.udacity.DownloadStatus
-import com.udacity.loadapp.ButtonState
+import com.udacity.loadapp.LoadAppApplication
+import com.udacity.loadapp.repository.DownloadFileRepository
+import com.udacity.loadapp.repository.DownloadStatus
+import com.udacity.loadapp.util.ButtonState
 import com.udacity.loadapp.R
 
 data class DownloadInfo(
@@ -37,8 +37,7 @@ private val list = listOf(
 class MainViewModel(
     private val application: Application,
     private val repository: DownloadFileRepository
-) :
-    AndroidViewModel(application) {
+) : AndroidViewModel(application) {
 
     private val _radioGroupList = MutableLiveData(list)
     val radioGroupList: LiveData<List<DownloadInfo>>
@@ -59,11 +58,12 @@ class MainViewModel(
             else -> ButtonState.None
         }
     }
+    val buttonState: LiveData<ButtonState>
+        get() = _buttonState
+
     init {
         repository.reset()
     }
-    val buttonState: LiveData<ButtonState>
-        get() = _buttonState
 
     fun onCheckedChanged(checkedId: Int) {
         val info = list[checkedId]
