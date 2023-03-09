@@ -3,10 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motion_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="20dp">
+        android:paddingHorizontal="20dp"
+        app:layoutDescription="@xml/fragment_detail_scene">
+
+        <ImageView
+            android:id="@+id/imageview_cursor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_arrow_upward"
+            android:contentDescription="@null"
+            app:layout_constraintStart_toStartOf="@id/status_text"
+            app:layout_constraintTop_toBottomOf="@id/status_text"/>
 
         <TextView
             android:id="@+id/filename_title_text"
@@ -78,5 +89,5 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
