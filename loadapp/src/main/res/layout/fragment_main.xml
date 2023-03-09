@@ -45,10 +45,12 @@
             android:layout_marginBottom="@dimen/spacing_16dp"
             android:background="?attr/colorPrimary"
             android:onClick="@{() -> viewModel.downloadFromUrl()}"
-            app:text="@string/download"
+            app:defaultText="@string/download"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:loadingText="@string/button_loading"
+            app:state="@{viewModel.buttonState}" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"

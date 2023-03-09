@@ -22,7 +22,6 @@
         </activity>
         <receiver
             android:name="com.udacity.loadapp.util.DownloadCompleteReceiver"
-
             android:enabled="true"
             android:exported="false" />
     </application>

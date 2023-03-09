@@ -1,14 +1,18 @@
 package com.udacity.loadapp.main
 
 import android.app.Application
-import android.app.DownloadManager
-import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.LoadAppApplication
+import com.udacity.DownloadFileRepository
+import com.udacity.DownloadStatus
 import com.udacity.loadapp.ButtonState
 import com.udacity.loadapp.R
-import com.udacity.loadapp.util.getDownloadManager
 
 data class DownloadInfo(
     val title: String,
@@ -30,7 +34,11 @@ private val list = listOf(
     )
 )
 
-class MainViewModel(private val application: Application) : AndroidViewModel(application) {
+class MainViewModel(
+    private val application: Application,
+    private val repository: DownloadFileRepository
+) :
+    AndroidViewModel(application) {
 
     private val _radioGroupList = MutableLiveData(list)
     val radioGroupList: LiveData<List<DownloadInfo>>
@@ -38,15 +46,24 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
 
     private var selectedDownloadInfo: DownloadInfo? = null
 
-    private val _buttonState = MutableLiveData<ButtonState>()
-    val buttonState: LiveData<ButtonState>
-        get() = _buttonState
-
     private val _emptySelectionEvent = MutableLiveData<Boolean>()
     val emptySelectionEvent: LiveData<Boolean>
         get() = _emptySelectionEvent
 
-    private var downloadID: Long = 0
+    private val _buttonState = Transformations.map(repository.downloadStatus) {
+        when (it) {
+            is DownloadStatus.Downloading -> ButtonState.Loading
+            is DownloadStatus.Success, is DownloadStatus.Failure -> {
+                ButtonState.Completed
+            }
+            else -> ButtonState.None
+        }
+    }
+    init {
+        repository.reset()
+    }
+    val buttonState: LiveData<ButtonState>
+        get() = _buttonState
 
     fun onCheckedChanged(checkedId: Int) {
         val info = list[checkedId]
@@ -58,19 +75,25 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
             _emptySelectionEvent.value = true
             return
         }
-        _buttonState.value = ButtonState.Clicked
-
-        val request = DownloadManager.Request(Uri.parse(selectedDownloadInfo!!.url))
-            .setTitle(selectedDownloadInfo!!.title)
-            .setDescription(application.getString(R.string.app_description))
-        try {
-            downloadID = getDownloadManager(application.applicationContext).enqueue(request)
-        } catch (_: Exception) {
-        }
+        repository.downloadFileFromUrl(
+            application,
+            selectedDownloadInfo!!.url,
+            selectedDownloadInfo!!.title,
+            application.getString(R.string.app_description)
+        )
     }
 
     fun doneEmptySelectionEvent() {
         _emptySelectionEvent.value = false
+    }
+
+    companion object {
+        val Factory = viewModelFactory {
+            initializer {
+                val application = this[APPLICATION_KEY] as LoadAppApplication
+                MainViewModel(application, application.downloadFileRepository)
+            }
+        }
     }
 
 }

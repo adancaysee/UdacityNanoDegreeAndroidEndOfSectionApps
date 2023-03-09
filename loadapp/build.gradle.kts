@@ -53,6 +53,8 @@ dependencies {
     implementation(Libraries.androidxNavigationUi)
     implementation(Libraries.androidxNavigationFragment)
 
+    implementation(Libraries.timber)
+
     testImplementation(TestLibraries.junit)
 
     androidTestImplementation(AndroidTestLibraries.junit)

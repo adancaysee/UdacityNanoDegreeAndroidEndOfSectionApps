@@ -18,7 +18,7 @@ import com.udacity.loadapp.util.DownloadCompleteReceiver
 class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+        ViewModelProvider(this, MainViewModel.Factory)[MainViewModel::class.java]
     }
     private lateinit var binding: FragmentMainBinding
 
@@ -32,6 +32,7 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(inflater)
 
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         requireActivity().registerReceiver(
             receiver,
