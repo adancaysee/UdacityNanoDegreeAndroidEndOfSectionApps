@@ -10,10 +10,7 @@ import android.os.Bundle
 import com.udacity.loadapp.LoadAppApplication
 import com.udacity.loadapp.repository.DownloadStatus
 import com.udacity.loadapp.R
-import com.udacity.loadapp.util.cancelAllNotifications
-import com.udacity.loadapp.util.getDownloadManager
-import com.udacity.loadapp.util.getNotificationManager
-import com.udacity.loadapp.util.sendDownloadCompletedNotification
+import com.udacity.loadapp.util.*
 
 class DownloadCompleteReceiver : BroadcastReceiver() {
 
@@ -41,8 +38,8 @@ class DownloadCompleteReceiver : BroadcastReceiver() {
             }
 
             val args = Bundle()
-            args.putString("status", statusStr)
-            args.putString("fileName", fileName)
+            args.putString(Constant.DOWNLOAD_STATUS, statusStr)
+            args.putString(Constant.FILE_NAME, fileName)
 
             getNotificationManager(context).cancelAllNotifications()
 

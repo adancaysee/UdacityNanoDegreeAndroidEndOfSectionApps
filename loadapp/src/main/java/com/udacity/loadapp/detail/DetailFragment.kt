@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.udacity.loadapp.databinding.FragmentDetailBinding
+import com.udacity.loadapp.util.Constant
 import com.udacity.loadapp.util.cancelAllNotifications
 import com.udacity.loadapp.util.getNotificationManager
 
@@ -21,8 +22,8 @@ class DetailFragment : Fragment() {
 
         getNotificationManager(requireContext()).cancelAllNotifications()
         if (arguments != null) {
-            val fileName = requireArguments().getString("fileName")
-            val status = requireArguments().getString("status")
+            val fileName = requireArguments().getString(Constant.FILE_NAME)
+            val status = requireArguments().getString(Constant.DOWNLOAD_STATUS)
             binding.filenameText.text = fileName
             binding.statusText.text = status
         }

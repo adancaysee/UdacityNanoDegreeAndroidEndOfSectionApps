@@ -45,6 +45,14 @@ class MainFragment : Fragment() {
             }
         }
 
+        viewModel.noInternetConnectionEvent.observe(viewLifecycleOwner) {
+            it?.let {
+                Toast.makeText(requireContext(),getString(R.string.not_found_conn),Toast.LENGTH_LONG).show()
+                viewModel.doneNoInternetConnectionEvent()
+            }
+
+        }
+
         viewModel.emptySelectionEvent.observe(viewLifecycleOwner) {
             if (it == true) {
                 Toast.makeText(
@@ -53,6 +61,17 @@ class MainFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
                 viewModel.doneEmptySelectionEvent()
+            }
+        }
+
+        viewModel.showDownloadCompleteMessageEvent.observe(viewLifecycleOwner) {
+            it?.let {
+                if (it) {
+                    Toast.makeText(requireContext(),getString(R.string.download_completed_success),Toast.LENGTH_LONG).show()
+                }else {
+                    Toast.makeText(requireContext(),getString(R.string.download_completed_failure),Toast.LENGTH_LONG).show()
+                }
+                viewModel.doneShowToastMessageEvent()
             }
         }
 

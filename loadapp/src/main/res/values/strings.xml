@@ -22,4 +22,7 @@
     <string name="ok">OK</string>
     <string name="label_file_name">File name:</string>
     <string name="label_status">Status:</string>
+    <string name="not_found_conn">Please connect the internet</string>
+    <string name="download_completed_success">Download completed successfully</string>
+    <string name="download_completed_failure">Download could not be completed</string>
 </resources>
