@@ -5,25 +5,21 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
-    namespace = "com.udacity.locationreminders"
+    namespace = "com.udacity.locationreminder"
     compileSdk = Config.compileSdkVersion
 
     defaultConfig {
-        applicationId = "com.udacity.locationreminders"
+        applicationId = "com.udacity.locationreminder"
         minSdk = 21
         targetSdk = Config.targetSdkVersion
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
     }
 
     buildTypes {
@@ -42,9 +38,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
+
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
 
     //App dependencies
     implementation(Libraries.androidxCore)
@@ -60,8 +61,10 @@ dependencies {
     implementation(Libraries.androidxRoomKtx)
     kapt(Libraries.androidxRoomCompiler)
 
-    testImplementation(TestLibraries.junit)
+    //Google Map
+    implementation(Libraries.playServicesMaps)
 
-    androidTestImplementation(AndroidTestLibraries.junit)
-    androidTestImplementation(AndroidTestLibraries.espressoCore)
+    testImplementation(TestLibraries.junit)
+    androidTestImplementation(TestLibraries.androidXJunitKtx)
+    androidTestImplementation(TestLibraries.espressoCore)
 }

@@ -7,9 +7,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.UdacityNanoDegreeAndroidEndOfSectionApps">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${LOCATION_REMINDER_MAPS_API_KEY}" />
+
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".MapsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

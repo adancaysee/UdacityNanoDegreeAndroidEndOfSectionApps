@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -54,6 +56,6 @@ dependencies {
 
     testImplementation(TestLibraries.junit)
 
-    androidTestImplementation(AndroidTestLibraries.junit)
-    androidTestImplementation(AndroidTestLibraries.espressoCore)
+    androidTestImplementation(TestLibraries.junit)
+    androidTestImplementation(TestLibraries.espressoCore)
 }

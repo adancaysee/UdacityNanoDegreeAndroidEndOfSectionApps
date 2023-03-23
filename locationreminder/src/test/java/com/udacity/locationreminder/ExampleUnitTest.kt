@@ -1,4 +1,4 @@
-package com.udacity.locationreminders
+package com.udacity.locationreminder
 
 import org.junit.Test
 
