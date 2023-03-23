@@ -6,6 +6,7 @@ plugins {
     id("kotlin-kapt")
     id("androidx.navigation.safeargs")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -61,6 +62,11 @@ dependencies {
     implementation(Libraries.androidxRoomKtx)
     kapt(Libraries.androidxRoomCompiler)
 
+    //Firebase
+    implementation(platform(Libraries.firebaseBom))
+    implementation(Libraries.firebaseAuthKtx)
+    implementation(Libraries.firebaseMessagingKtx)
+    
     //Google Map
     implementation(Libraries.playServicesMaps)
 
