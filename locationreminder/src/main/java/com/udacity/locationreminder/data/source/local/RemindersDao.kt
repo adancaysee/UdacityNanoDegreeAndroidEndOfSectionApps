@@ -20,6 +20,6 @@ interface RemindersDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveReminder(reminder: ReminderEntity)
 
-    @Query("DELETE FROM reminders")
+    @Query("DELETE FROM reminders_table")
     suspend fun deleteAllReminders()
 }
