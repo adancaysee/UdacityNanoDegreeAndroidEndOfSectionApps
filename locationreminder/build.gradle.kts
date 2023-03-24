@@ -41,6 +41,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -53,6 +54,7 @@ dependencies {
     implementation(Libraries.androidxAppcompat)
     implementation(Libraries.material)
     implementation(Libraries.constraintLayout)
+    implementation(Libraries.swiperefreshlayout)
     implementation(Libraries.timber)
 
     //Architecture components
@@ -66,7 +68,7 @@ dependencies {
     implementation(platform(Libraries.firebaseBom))
     implementation(Libraries.firebaseAuthKtx)
     implementation(Libraries.firebaseMessagingKtx)
-    
+
     //Google Map
     implementation(Libraries.playServicesMaps)
 
