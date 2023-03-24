@@ -1,4 +1,4 @@
-package com.udacity.todo.util
+package com.udacity.locationreminder.util
 
 import androidx.lifecycle.Observer
 
