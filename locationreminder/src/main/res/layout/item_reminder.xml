@@ -3,6 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="item"
+            type="com.udacity.locationreminder.data.domain.Reminder" />
+
+        <variable
+            name="onClickListener"
+            type="com.udacity.locationreminder.reminderlist.RemindersListAdapter.OnClickListener" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/reminderCardView"
         android:layout_width="match_parent"
