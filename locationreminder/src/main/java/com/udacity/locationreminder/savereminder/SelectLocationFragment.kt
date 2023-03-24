@@ -12,9 +12,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.udacity.locationreminder.R
+import com.udacity.locationreminder.base.BaseFragment
 import com.udacity.locationreminder.databinding.FragmentSelectLocationBinding
 
-class SelectLocationFragment : Fragment(), OnMapReadyCallback {
+class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: FragmentSelectLocationBinding

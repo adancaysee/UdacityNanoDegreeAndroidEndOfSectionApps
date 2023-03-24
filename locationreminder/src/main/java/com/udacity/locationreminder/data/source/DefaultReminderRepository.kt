@@ -25,7 +25,11 @@ class DefaultReminderRepository(
     override suspend fun getReminders(): Result<List<Reminder>> = withContext(coroutineDispatcher) {
         return@withContext try {
             val reminders = remindersDao.getReminders()
-            Result.Success(reminders!!.asDomain())
+            if (reminders != null) {
+                Result.Success(reminders.asDomain())
+            } else {
+                Result.Error(Exception("Not found reminders"))
+            }
         } catch (ex: Exception) {
             Result.Error(Exception(ex.localizedMessage ?: "unknown exception"))
         }
@@ -35,14 +39,19 @@ class DefaultReminderRepository(
         remindersDao.saveReminder(reminder.asDatabase())
     }
 
-    override suspend fun getReminder(id: String): Result<Reminder> = withContext(coroutineDispatcher) {
-        return@withContext try {
-            val reminder = remindersDao.getReminderById(id)
-            Result.Success(reminder!!.asDomain())
-        }catch (ex:Exception) {
-            Result.Error(Exception("Not found reminder"))
+    override suspend fun getReminder(id: String): Result<Reminder> =
+        withContext(coroutineDispatcher) {
+            return@withContext try {
+                val reminder = remindersDao.getReminderById(id)
+                if (reminder != null) {
+                    Result.Success(reminder.asDomain())
+                } else {
+                    Result.Error(Exception("Not found reminder"))
+                }
+            } catch (ex: Exception) {
+                Result.Error(Exception(ex.localizedMessage ?: "unknown exception"))
+            }
         }
-    }
 
     override suspend fun deleteAllReminders() = withContext(coroutineDispatcher) {
         remindersDao.deleteAllReminders()

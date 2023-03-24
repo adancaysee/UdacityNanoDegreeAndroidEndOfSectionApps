@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.udacity.locationreminder.base.BaseFragment
 import com.udacity.locationreminder.databinding.FragmentSaveReminderBinding
 
-class SaveReminderFragment : Fragment() {
+class SaveReminderFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSaveReminderBinding
 

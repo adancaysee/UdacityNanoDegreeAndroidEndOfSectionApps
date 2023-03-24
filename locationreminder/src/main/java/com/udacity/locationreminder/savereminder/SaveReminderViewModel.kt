@@ -1,4 +1,7 @@
 package com.udacity.locationreminder.savereminder
 
-class SaveReminderViewModel {
+import android.app.Application
+import com.udacity.locationreminder.base.BaseViewModel
+
+class SaveReminderViewModel(application: Application) : BaseViewModel(application) {
 }
