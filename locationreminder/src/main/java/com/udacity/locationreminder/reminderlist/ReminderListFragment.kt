@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import com.udacity.locationreminder.base.BaseFragment
 import com.udacity.locationreminder.databinding.FragmentRemindersListBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ReminderListFragment : BaseFragment() {
 
     private lateinit var binding: FragmentRemindersListBinding
-    override val viewModel: ReminderListViewModel by viewModels()
+    override val viewModel: ReminderListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,

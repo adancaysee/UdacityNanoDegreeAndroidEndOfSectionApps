@@ -32,6 +32,12 @@ object Libraries {
     //Coil
     const val coil = "io.coil-kt:coil:1.1.1"
 
+    //Koin
+    const val koinAndroid = "io.insert-koin:koin-android:${Versions.koinVersion}"
+    const val koinAndroidXScope =  "org.koin:koin-androidx-scope:${Versions.koinVersion}"
+    const val koinViewmodel = "org.koin:koin-androidx-viewmodel:${Versions.koinVersion}"
+    const val koinAndroidXNavigation = "io.insert-koin:koin-androidx-navigation:${Versions.koinVersion}"
+
     //Glide
     const val glide = "com.github.bumptech.glide:glide:4.14.2"
 
@@ -79,6 +85,8 @@ object TestLibraries {
 
     const val robolectric = "org.robolectric:robolectric:4.9.2"
     const val truth = "com.google.truth:truth:1.1.3"
+
+    const val koinTestJUnit4 = "io.insert-koin:koin-test-junit4:${Versions.koinVersion}"
 
     const val fragmentTesting = "androidx.fragment:fragment-testing:1.5.5"
 }

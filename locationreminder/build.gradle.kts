@@ -47,8 +47,6 @@ android {
 
 dependencies {
 
-    implementation("com.google.android.gms:play-services-maps:18.1.0")
-
     //App dependencies
     implementation(Libraries.androidxCore)
     implementation(Libraries.androidxAppcompat)
@@ -63,6 +61,7 @@ dependencies {
     implementation(Libraries.androidxRoomRuntime)
     implementation(Libraries.androidxRoomKtx)
     kapt(Libraries.androidxRoomCompiler)
+    implementation(Libraries.koinAndroid)
 
     //Firebase
     implementation(platform(Libraries.firebaseBom))

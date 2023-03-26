@@ -6,4 +6,5 @@ object Versions {
     const val retrofitVersion = "2.9.0"
     const val workVersion = "2.7.1"
     const val espressoVersion = "3.5.1"
+    const val koinVersion = "3.3.3"
 }

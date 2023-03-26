@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -14,12 +13,13 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.udacity.locationreminder.R
 import com.udacity.locationreminder.base.BaseFragment
 import com.udacity.locationreminder.databinding.FragmentSelectLocationBinding
+import org.koin.android.ext.android.inject
 
 class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: FragmentSelectLocationBinding
-    override val viewModel: SaveReminderViewModel by viewModels()
+    override val viewModel: SaveReminderViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
