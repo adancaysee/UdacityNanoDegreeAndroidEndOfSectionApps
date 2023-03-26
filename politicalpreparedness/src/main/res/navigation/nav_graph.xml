@@ -9,5 +9,14 @@
         android:id="@+id/launch_destination"
         android:name="com.udacity.politicalpreparedness.launch.LaunchFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_launch"/>
+        tools:layout="@layout/fragment_launch">
+        <action
+            android:id="@+id/action_open_elections"
+            app:destination="@id/elections_destination" />
+    </fragment>
+    <fragment
+        android:id="@+id/elections_destination"
+        android:name="com.udacity.politicalpreparedness.elections.ElectionsFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_elections" />
 </navigation>

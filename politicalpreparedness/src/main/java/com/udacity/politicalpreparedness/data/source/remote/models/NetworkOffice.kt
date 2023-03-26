@@ -2,14 +2,14 @@ package com.udacity.politicalpreparedness.data.source.remote.models
 
 import com.squareup.moshi.Json
 
-data class Office(
+data class NetworkOffice(
     val name: String,
-    @Json(name = "divisionId") val division: Division,
+    @Json(name = "divisionId") val division: NetworkDivision,
     @Json(name = "officialIndices") val officials: List<Int>
 ) {
-    fun getRepresentatives(officials: List<Official>): List<Representative> {
+    fun getRepresentatives(officials: List<NetworkOfficial>): List<NetworkRepresentative> {
         return this.officials.map { index ->
-            Representative(officials[index], this)
+            NetworkRepresentative(officials[index], this)
         }
     }
 }

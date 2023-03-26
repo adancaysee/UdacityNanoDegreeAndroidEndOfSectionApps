@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.PoliticalPreparedness.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextAppearance.PoliticalPreparedness.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextAppearance.PoliticalPreparedness.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextAppearance.PoliticalPreparedness.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+</resources>

@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.udacity.politicalpreparedness.data.domain.Division
+import com.udacity.politicalpreparedness.data.domain.Election
 import java.util.*
 
 @Entity(tableName = "elections_table")
@@ -19,3 +21,11 @@ data class LocalDivision(
     val country: String,
     val state: String
 )
+
+fun LocalDivision.asDomain() = Division(id, country, state)
+
+fun List<ElectionEntity>.asDomain(): List<Election> = map {
+    Election(
+        it.id, it.name, it.electionDay, it.division.asDomain()
+    )
+}

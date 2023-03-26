@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.PoliticalPreparedness.HeaderTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="android:paddingTop">@dimen/spacing_8dp</item>
+        <item name="android:paddingBottom">@dimen/spacing_8dp</item>
+        <item name="android:alpha">0.7</item>
+        <item name="android:textSize">23sp</item>
+    </style>
+</resources>

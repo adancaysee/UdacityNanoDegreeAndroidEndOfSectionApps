@@ -2,7 +2,7 @@ package com.udacity.politicalpreparedness.data.source.remote.models
 
 import com.squareup.moshi.Json
 
-data class ElectionOfficial(
+data class NetworkElectionOfficial(
     val name: String,
     val title: String,
     @Json(name = "officePhoneNumber") val phone: String,

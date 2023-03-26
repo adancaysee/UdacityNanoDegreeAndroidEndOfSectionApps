@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.udacity.politicalpreparedness.databinding.FragmentLaunchBinding
 
 class LaunchFragment : Fragment() {
@@ -17,6 +18,10 @@ class LaunchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLaunchBinding.inflate(inflater)
+
+        binding.navigateToElectionsButton.setOnClickListener {
+            findNavController().navigate(LaunchFragmentDirections.actionOpenElections() )
+        }
 
         return binding.root
     }
