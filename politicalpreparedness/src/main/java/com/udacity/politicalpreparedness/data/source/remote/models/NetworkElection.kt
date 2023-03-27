@@ -17,3 +17,7 @@ fun List<NetworkElection>.asDomain(): List<Election> = map {
         it.id, it.name, it.electionDay, it.division.asDomain()
     )
 }
+
+fun NetworkElection.asDomain(): Election = Election(
+    this.id, this.name, this.electionDay, this.division.asDomain()
+)

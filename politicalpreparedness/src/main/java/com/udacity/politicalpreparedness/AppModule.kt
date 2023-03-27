@@ -3,6 +3,8 @@ package com.udacity.politicalpreparedness
 import androidx.room.Room
 import com.udacity.politicalpreparedness.data.repository.ElectionRepository
 import com.udacity.politicalpreparedness.data.repository.DefaultElectionRepository
+import com.udacity.politicalpreparedness.data.repository.DefaultVoterInfoRepository
+import com.udacity.politicalpreparedness.data.repository.VoterInfoRepository
 import com.udacity.politicalpreparedness.data.source.local.CivicsDatabase
 import com.udacity.politicalpreparedness.data.source.remote.*
 import com.udacity.politicalpreparedness.elections.ElectionsViewModel
@@ -31,15 +33,19 @@ val appModule = module {
     single<CivicsNetworkDataSource> {
         CivicsRetrofitNetworkDataSource(get())
     }
-    //Default repository
+
+    //Repositories
     single<ElectionRepository> {
         DefaultElectionRepository(get(), get())
+    }
+    single<VoterInfoRepository> {
+        DefaultVoterInfoRepository(get())
     }
     //ViewModels
     viewModel {
         ElectionsViewModel(get())
     }
     viewModel {
-        VoterInfoViewModel(get())
+        VoterInfoViewModel(get(),get())
     }
 }

@@ -8,7 +8,7 @@ interface CivicsNetworkDataSource {
 
     suspend fun getElections(): NetworkElectionResponse
 
-    suspend fun getVoterInfo(address: String, electionId: Int): NetworkVoterInfoResponse
+    suspend fun getVoterInfo(electionId: Int,address: String): NetworkVoterInfoResponse
 
     suspend fun getRepresentatives(address: String): NetworkRepresentativeResponse
 }

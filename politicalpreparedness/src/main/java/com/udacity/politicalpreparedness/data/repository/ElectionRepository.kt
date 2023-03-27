@@ -21,6 +21,8 @@ interface ElectionRepository {
 
     suspend fun saveElection(electionEntity: ElectionEntity)
 
+    fun observeSavedElection(electionId: Int): LiveData<Election?>
+
     suspend fun getSavedElection(electionId: Int): Result<Election>
 
     suspend fun deleteElection(electionId: Int)
@@ -51,6 +53,11 @@ class DefaultElectionRepository(
     override suspend fun saveElection(electionEntity: ElectionEntity) = withContext(dispatcher) {
         electionsDao.saveElection(electionEntity)
     }
+
+    override fun observeSavedElection(electionId: Int): LiveData<Election?> =
+        Transformations.map(electionsDao.observeSavedElection(electionId)) {
+            it?.asDomain()
+        }
 
     override suspend fun getSavedElection(electionId: Int): Result<Election> =
         withContext(dispatcher) {

@@ -20,4 +20,7 @@ interface ElectionsDao {
 
     @Query("DELETE FROM elections_table WHERE id = :id" )
     fun deleteElection(id:Int)
+
+    @Query("SELECT * FROM elections_table WHERE id = :id")
+    fun observeSavedElection(id: Int): LiveData<ElectionEntity?>
 }
