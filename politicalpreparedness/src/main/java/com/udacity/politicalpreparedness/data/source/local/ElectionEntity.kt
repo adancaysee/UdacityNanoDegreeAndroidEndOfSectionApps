@@ -29,3 +29,6 @@ fun List<ElectionEntity>.asDomain(): List<Election> = map {
         it.id, it.name, it.electionDay, it.division.asDomain()
     )
 }
+
+fun ElectionEntity.asDomain(): Election =
+    Election(this.id, this.name, this.electionDay, this.division.asDomain())

@@ -18,5 +18,22 @@
         android:id="@+id/elections_destination"
         android:name="com.udacity.politicalpreparedness.elections.ElectionsFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_elections" />
+        tools:layout="@layout/fragment_elections">
+
+        <action
+            android:id="@+id/action_to_voter_info_destination"
+            app:destination="@id/voter_info_destination" />
+    </fragment>
+    <fragment
+        android:id="@+id/voter_info_destination"
+        android:name="com.udacity.politicalpreparedness.voterinfo.VoterInfoFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_voter_info">
+        <argument
+            android:name="arg_election_id"
+            app:argType="integer" />
+        <argument
+            android:name="arg_division"
+            app:argType="com.udacity.politicalpreparedness.data.domain.Division" />
+    </fragment>
 </navigation>

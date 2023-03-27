@@ -1,4 +1,4 @@
-package com.udacity.politicalpreparedness.elections.voterinfo
+package com.udacity.politicalpreparedness.voterinfo
 
 import android.os.Bundle
 import android.view.LayoutInflater

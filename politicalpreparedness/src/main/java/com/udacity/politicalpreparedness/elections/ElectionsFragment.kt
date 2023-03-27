@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.udacity.politicalpreparedness.databinding.FragmentElectionsBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,11 +26,12 @@ class ElectionsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val electionListAdapter = ElectionListAdapter(ElectionListAdapter.ElectionListener {
-            //findNavController().navigate(R.id.action_open_elections)
+            viewModel.navigateToVoterInfo(it)
         })
         binding.electionsRecyclerView.adapter = electionListAdapter
+
         val savedElectionListAdapter = ElectionListAdapter(ElectionListAdapter.ElectionListener {
-            Toast.makeText(requireContext(),it.name,Toast.LENGTH_LONG).show()
+            viewModel.navigateToVoterInfo(it)
         })
         binding.savedElectionsRecyclerView.adapter = savedElectionListAdapter
 
@@ -39,13 +40,16 @@ class ElectionsFragment : Fragment() {
                 electionListAdapter.submitList(it)
             }
         }
+
         viewModel.savedElectionList.observe(viewLifecycleOwner) {
             it?.let {
                 savedElectionListAdapter.submitList(it)
             }
         }
 
-
+        viewModel.navigateToVoterInfoEvent.observe(viewLifecycleOwner) {
+            findNavController().navigate(ElectionsFragmentDirections.actionToVoterInfoDestination(it.id,it.division))
+        }
 
         return binding.root
     }

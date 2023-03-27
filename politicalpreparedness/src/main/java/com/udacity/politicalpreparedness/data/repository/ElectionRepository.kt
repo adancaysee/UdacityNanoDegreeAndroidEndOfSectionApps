@@ -1,4 +1,4 @@
-package com.udacity.politicalpreparedness.data.source
+package com.udacity.politicalpreparedness.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
@@ -13,25 +13,28 @@ import com.udacity.politicalpreparedness.data.source.local.asDomain
 import com.udacity.politicalpreparedness.data.source.remote.models.asDomain
 import kotlinx.coroutines.Dispatchers
 
-interface CivicsRepository {
+interface ElectionRepository {
 
-    suspend fun fetchUpcomingSelections(): Result<List<Election>>
+    suspend fun fetchUpcomingElections(): Result<List<Election>>
 
     fun observeSavedElections(): LiveData<List<Election>?>
 
     suspend fun saveElection(electionEntity: ElectionEntity)
 
+    suspend fun getSavedElection(electionId: Int): Result<Election>
+
+    suspend fun deleteElection(electionId: Int)
 
 }
 
-class DefaultCivicsRepository(
+class DefaultElectionRepository(
     private val electionsDao: ElectionsDao,
     private val civicsNetworkDataSource: CivicsNetworkDataSource,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
-) : CivicsRepository {
+) : ElectionRepository {
 
-    override suspend fun fetchUpcomingSelections(): Result<List<Election>> {
-        return withContext(dispatcher) {
+    override suspend fun fetchUpcomingElections(): Result<List<Election>> =
+        withContext(dispatcher) {
             return@withContext try {
                 val data = civicsNetworkDataSource.getElections().elections
                 Result.Success(data.asDomain())
@@ -39,18 +42,33 @@ class DefaultCivicsRepository(
                 Result.Error(ex)
             }
         }
-    }
 
     override fun observeSavedElections(): LiveData<List<Election>?> =
         Transformations.map(electionsDao.observeSavedElections()) {
             it?.asDomain()
         }
 
-    override suspend fun saveElection(electionEntity: ElectionEntity) {
-        withContext(dispatcher) {
-            electionsDao
-        }
+    override suspend fun saveElection(electionEntity: ElectionEntity) = withContext(dispatcher) {
+        electionsDao.saveElection(electionEntity)
     }
 
+    override suspend fun getSavedElection(electionId: Int): Result<Election> =
+        withContext(dispatcher) {
+            return@withContext try {
+                val data = electionsDao.getElection(electionId)
+                if (data != null) {
+                    Result.Success(data.asDomain())
+                } else {
+                    Result.Error(Exception("Not found"))
+                }
+            } catch (ex: Exception) {
+                Result.Error(ex)
+            }
+        }
+
+
+    override suspend fun deleteElection(electionId: Int) = withContext(dispatcher) {
+        electionsDao.deleteElection(electionId)
+    }
 }
 
