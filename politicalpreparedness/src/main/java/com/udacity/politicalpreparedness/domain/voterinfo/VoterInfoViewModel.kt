@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.udacity.politicalpreparedness.data.domain.Address
 import com.udacity.politicalpreparedness.data.domain.Division
 import com.udacity.politicalpreparedness.data.repository.ElectionRepository
 import kotlinx.coroutines.launch
@@ -39,8 +40,8 @@ class VoterInfoViewModel(
     private fun fetchVoterInfo(electionId: Int,division: Division) {
         _dataLoading.value = true
         viewModelScope.launch {
-            val address = "${division.state}, ${division.country}"
-            val result = voterInfoRepository.fetchVoterInfo(electionId,address)
+            val address = Address("","","",division.state,"")
+            val result = voterInfoRepository.fetchVoterInfo(electionId,address.toFormattedString())
             if (result is Result.Success) {
 
             }else {

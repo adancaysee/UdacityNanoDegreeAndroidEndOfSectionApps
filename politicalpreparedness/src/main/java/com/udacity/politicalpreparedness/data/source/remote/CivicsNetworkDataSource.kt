@@ -21,7 +21,7 @@ class CivicsRetrofitNetworkDataSource(
     }
 
     override suspend fun getVoterInfo(electionId: Int, address: String): NetworkVoterInfoResponse {
-        return civicsApi.getVoterInfo(electionId)
+        return civicsApi.getVoterInfo(electionId,address)
     }
 
     override suspend fun getRepresentatives(address: String): NetworkRepresentativeResponse {

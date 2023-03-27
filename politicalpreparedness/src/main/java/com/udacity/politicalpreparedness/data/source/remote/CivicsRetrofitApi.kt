@@ -24,6 +24,7 @@ interface CivicsRetrofitApi {
     @GET("voterinfo")
     suspend fun getVoterInfo(
         @Query("electionId") electionId: Int,
+        @Query("address") address: String,
     ): NetworkVoterInfoResponse
 
     @GET("representatives")
@@ -49,7 +50,7 @@ private fun getOkHttpClient() = OkHttpClient.Builder()
             .request()
             .url()
             .newBuilder()
-            .addQueryParameter("key", BuildConfig.POLITICAL_PREPAREDNESS_GOOGLE_API_KEY)
+            .addQueryParameter("key", "AIzaSyC4DIJsH5e0UyV1CKtuz9YLl6odRubYbSM")
             .build()
         chain.proceed(chain.request().newBuilder().url(url).build())
     }.build()
