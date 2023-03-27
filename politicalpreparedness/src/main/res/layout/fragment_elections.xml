@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.udacity.politicalpreparedness.elections.ElectionsViewModel" />
+            type="com.udacity.politicalpreparedness.domain.elections.ElectionsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

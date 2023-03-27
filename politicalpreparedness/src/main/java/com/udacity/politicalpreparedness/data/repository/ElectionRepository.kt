@@ -7,7 +7,6 @@ import com.udacity.politicalpreparedness.data.source.local.ElectionsDao
 import com.udacity.politicalpreparedness.data.source.remote.CivicsNetworkDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import com.udacity.politicalpreparedness.data.domain.Result
 import com.udacity.politicalpreparedness.data.source.local.ElectionEntity
 import com.udacity.politicalpreparedness.data.source.local.asDomain
 import com.udacity.politicalpreparedness.data.source.remote.models.asDomain

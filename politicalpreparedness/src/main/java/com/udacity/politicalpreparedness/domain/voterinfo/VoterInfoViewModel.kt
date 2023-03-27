@@ -1,16 +1,14 @@
-package com.udacity.politicalpreparedness.voterinfo
+package com.udacity.politicalpreparedness.domain.voterinfo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.udacity.politicalpreparedness.data.domain.Division
 import com.udacity.politicalpreparedness.data.repository.ElectionRepository
 import kotlinx.coroutines.launch
-import com.udacity.politicalpreparedness.data.domain.Result
+import com.udacity.politicalpreparedness.data.repository.Result
 import com.udacity.politicalpreparedness.data.repository.VoterInfoRepository
-import timber.log.Timber
 
 class VoterInfoViewModel(
     private val electionRepository: ElectionRepository,

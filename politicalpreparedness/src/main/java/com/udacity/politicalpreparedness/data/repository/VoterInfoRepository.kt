@@ -5,7 +5,6 @@ import com.udacity.politicalpreparedness.data.source.remote.CivicsNetworkDataSou
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.udacity.politicalpreparedness.data.domain.Result
 import com.udacity.politicalpreparedness.data.source.remote.models.asDomain
 
 interface VoterInfoRepository {

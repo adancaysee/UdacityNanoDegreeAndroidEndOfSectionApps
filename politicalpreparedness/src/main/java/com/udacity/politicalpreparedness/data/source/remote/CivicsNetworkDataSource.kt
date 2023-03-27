@@ -13,5 +13,22 @@ interface CivicsNetworkDataSource {
     suspend fun getRepresentatives(address: String): NetworkRepresentativeResponse
 }
 
+class CivicsRetrofitNetworkDataSource(
+    private val civicsApi: CivicsRetrofitApi
+) : CivicsNetworkDataSource {
+    override suspend fun getElections(): NetworkElectionResponse {
+        return civicsApi.getElections()
+    }
+
+    override suspend fun getVoterInfo(electionId: Int, address: String): NetworkVoterInfoResponse {
+        return civicsApi.getVoterInfo(electionId)
+    }
+
+    override suspend fun getRepresentatives(address: String): NetworkRepresentativeResponse {
+        return civicsApi.getRepresentatives(address)
+    }
+
+}
+
 
 

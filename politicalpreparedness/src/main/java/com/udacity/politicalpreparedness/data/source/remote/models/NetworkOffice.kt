@@ -1,6 +1,7 @@
 package com.udacity.politicalpreparedness.data.source.remote.models
 
 import com.squareup.moshi.Json
+import com.udacity.politicalpreparedness.data.domain.Office
 
 data class NetworkOffice(
     val name: String,
@@ -13,3 +14,9 @@ data class NetworkOffice(
         }
     }
 }
+
+fun NetworkOffice.asDomain() = Office(
+    name = this.name,
+    division = this.division.asDomain(),
+    officials = this.officials
+)

@@ -1,10 +1,10 @@
-package com.udacity.politicalpreparedness.elections
+package com.udacity.politicalpreparedness.domain.elections
 
 import androidx.lifecycle.*
 import com.udacity.politicalpreparedness.data.domain.Election
 import com.udacity.politicalpreparedness.data.repository.ElectionRepository
 import kotlinx.coroutines.launch
-import com.udacity.politicalpreparedness.data.domain.Result
+import com.udacity.politicalpreparedness.data.repository.Result
 import com.udacity.politicalpreparedness.util.SingleLiveEvent
 
 class ElectionsViewModel(private val repository: ElectionRepository) : ViewModel() {

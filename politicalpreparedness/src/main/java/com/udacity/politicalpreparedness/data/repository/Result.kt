@@ -1,4 +1,4 @@
-package com.udacity.politicalpreparedness.data.domain
+package com.udacity.politicalpreparedness.data.repository
 
 sealed class Result<out R> {
 

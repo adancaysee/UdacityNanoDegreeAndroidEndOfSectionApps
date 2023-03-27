@@ -7,16 +7,19 @@
 
     <fragment
         android:id="@+id/launch_destination"
-        android:name="com.udacity.politicalpreparedness.launch.LaunchFragment"
+        android:name="com.udacity.politicalpreparedness.domain.launch.LaunchFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_launch">
         <action
             android:id="@+id/action_open_elections"
             app:destination="@id/elections_destination" />
+        <action
+            android:id="@+id/action_open_representatives"
+            app:destination="@id/representatives_destination" />
     </fragment>
     <fragment
         android:id="@+id/elections_destination"
-        android:name="com.udacity.politicalpreparedness.elections.ElectionsFragment"
+        android:name="com.udacity.politicalpreparedness.domain.elections.ElectionsFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_elections">
 
@@ -26,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/voter_info_destination"
-        android:name="com.udacity.politicalpreparedness.voterinfo.VoterInfoFragment"
+        android:name="com.udacity.politicalpreparedness.domain.voterinfo.VoterInfoFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_voter_info">
         <argument
@@ -36,4 +39,9 @@
             android:name="arg_division"
             app:argType="com.udacity.politicalpreparedness.data.domain.Division" />
     </fragment>
+    <fragment
+        android:id="@+id/representatives_destination"
+        android:name="com.udacity.politicalpreparedness.domain.representative.RepresentativesFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_representatives"/>
 </navigation>

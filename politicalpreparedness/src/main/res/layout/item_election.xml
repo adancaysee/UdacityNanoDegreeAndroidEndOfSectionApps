@@ -10,7 +10,7 @@
 
         <variable
             name="clickListener"
-            type="com.udacity.politicalpreparedness.elections.ElectionListAdapter.ElectionListener" />
+            type="com.udacity.politicalpreparedness.domain.elections.ElectionListAdapter.ElectionListener" />
     </data>
 
     <LinearLayout

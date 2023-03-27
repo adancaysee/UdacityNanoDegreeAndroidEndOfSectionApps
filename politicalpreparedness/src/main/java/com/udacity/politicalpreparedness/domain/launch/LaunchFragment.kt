@@ -1,4 +1,4 @@
-package com.udacity.politicalpreparedness.launch
+package com.udacity.politicalpreparedness.domain.launch
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,7 +20,11 @@ class LaunchFragment : Fragment() {
         binding = FragmentLaunchBinding.inflate(inflater)
 
         binding.navigateToElectionsButton.setOnClickListener {
-            findNavController().navigate(LaunchFragmentDirections.actionOpenElections() )
+            findNavController().navigate(LaunchFragmentDirections.actionOpenElections())
+        }
+
+        binding.navigateToMyRepresentatives.setOnClickListener {
+            findNavController().navigate(LaunchFragmentDirections.actionOpenRepresentatives())
         }
 
         return binding.root

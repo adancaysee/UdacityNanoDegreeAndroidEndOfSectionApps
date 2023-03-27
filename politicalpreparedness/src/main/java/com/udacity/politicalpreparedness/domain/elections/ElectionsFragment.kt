@@ -1,4 +1,4 @@
-package com.udacity.politicalpreparedness.elections
+package com.udacity.politicalpreparedness.domain.elections
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -48,7 +48,12 @@ class ElectionsFragment : Fragment() {
         }
 
         viewModel.navigateToVoterInfoEvent.observe(viewLifecycleOwner) {
-            findNavController().navigate(ElectionsFragmentDirections.actionToVoterInfoDestination(it.id,it.division))
+            findNavController().navigate(
+                ElectionsFragmentDirections.actionToVoterInfoDestination(
+                    it.id,
+                    it.division
+                )
+            )
         }
 
         return binding.root

@@ -1,4 +1,4 @@
-package com.udacity.politicalpreparedness.elections
+package com.udacity.politicalpreparedness.domain.elections
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
