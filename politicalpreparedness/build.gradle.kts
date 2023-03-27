@@ -69,6 +69,8 @@ dependencies {
     //Coil
     implementation(Libraries.coil)
 
+    implementation(Libraries.playServicesLocation)
+
     testImplementation(TestLibraries.junit)
     androidTestImplementation(TestLibraries.androidXJunitKtx)
     androidTestImplementation(TestLibraries.espressoCore)

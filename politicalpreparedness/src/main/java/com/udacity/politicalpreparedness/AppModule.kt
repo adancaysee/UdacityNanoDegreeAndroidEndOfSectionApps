@@ -51,6 +51,6 @@ val appModule = module {
         VoterInfoViewModel(get(), get())
     }
     viewModel {
-        RepresentativesViewModel(get())
+        RepresentativesViewModel(get(),get())
     }
 }

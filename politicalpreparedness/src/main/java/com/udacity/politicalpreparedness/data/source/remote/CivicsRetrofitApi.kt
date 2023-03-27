@@ -3,7 +3,6 @@ package com.udacity.politicalpreparedness.data.source.remote
 import DateAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.udacity.politicalpreparedness.BuildConfig
 import com.udacity.politicalpreparedness.data.source.remote.jsonadapter.ElectionAdapter
 import com.udacity.politicalpreparedness.data.source.remote.models.NetworkElectionResponse
 import com.udacity.politicalpreparedness.data.source.remote.models.NetworkRepresentativeResponse
