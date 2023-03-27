@@ -25,7 +25,7 @@ import timber.log.Timber
 
 class RepresentativesFragment : Fragment() {
 
-    private lateinit var binding:FragmentRepresentativesBinding
+    private lateinit var binding: FragmentRepresentativesBinding
 
     private val viewModel: RepresentativesViewModel by viewModel()
 
@@ -33,7 +33,7 @@ class RepresentativesFragment : Fragment() {
         ActivityResultContracts.StartIntentSenderForResult()
     ) { activityResult ->
         if (activityResult.resultCode == AppCompatActivity.RESULT_OK) {
-            viewModel.findMyLocation()
+            viewModel.getLocation()
         } else {
             showLocationSettingSnackbar()
         }
@@ -69,6 +69,16 @@ class RepresentativesFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        listenLocationSettingRequestResponse()
+
+        binding.buttonLocation.setOnClickListener {
+            requestForegroundLocationPermissions()
+        }
+
+        return binding.root
+    }
+
+    private fun listenLocationSettingRequestResponse() {
         viewModel.checkLocationSettingFailureEvent.observe(viewLifecycleOwner) {
             it?.let { exception ->
                 if (exception is ResolvableApiException) {
@@ -82,21 +92,15 @@ class RepresentativesFragment : Fragment() {
                 } else {
                     showLocationSettingSnackbar()
                 }
-
             }
         }
-
-        return binding.root
-    }
-
-    override fun onStart() {
-        super.onStart()
-        requestForegroundLocationPermissions()
     }
 
     private fun requestForegroundLocationPermissions() {
         when {
-            requireActivity().hasPermission(Manifest.permission.ACCESS_FINE_LOCATION) || requireActivity().hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION) -> {
+            requireActivity().hasPermission(Manifest.permission.ACCESS_FINE_LOCATION) || requireActivity().hasPermission(
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) -> {
                 requestBackgroundLocationPermission()
             }
             shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) || shouldShowRequestPermissionRationale(
@@ -119,11 +123,9 @@ class RepresentativesFragment : Fragment() {
         when {
             (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) -> {
                 viewModel.checkDeviceLocationSettingsAndFindMyLocation()
-
             }
             requireActivity().hasPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION) -> {
                 viewModel.checkDeviceLocationSettingsAndFindMyLocation()
-
             }
             shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION) -> {
                 showOpenPermissionSettingSnackbar()

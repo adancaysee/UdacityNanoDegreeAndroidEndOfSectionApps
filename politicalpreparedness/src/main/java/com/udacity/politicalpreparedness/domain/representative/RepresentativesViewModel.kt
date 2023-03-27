@@ -1,16 +1,23 @@
 package com.udacity.politicalpreparedness.domain.representative
 
+import android.annotation.SuppressLint
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.udacity.politicalpreparedness.data.domain.Representative
-import com.udacity.politicalpreparedness.data.repository.Result
-import com.udacity.politicalpreparedness.data.repository.RepresentativeRepository
-import kotlinx.coroutines.launch
+import android.location.Geocoder
+import android.location.Location
+import android.os.Build
+import android.os.Looper
+import androidx.lifecycle.*
 import com.google.android.gms.location.*
+import com.udacity.politicalpreparedness.data.domain.Representative
+import com.udacity.politicalpreparedness.data.repository.RepresentativeRepository
+import com.udacity.politicalpreparedness.data.domain.Address
+import com.udacity.politicalpreparedness.R
 import com.udacity.politicalpreparedness.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.*
+
 
 
 class RepresentativesViewModel(
@@ -23,20 +30,45 @@ class RepresentativesViewModel(
     private val _dataLoading = MutableLiveData(false)
     val dataLoading: LiveData<Boolean> = _dataLoading
 
-    private val _checkLocationSettingFailureEvent = SingleLiveEvent<Exception?>()
-    val checkLocationSettingFailureEvent: SingleLiveEvent<Exception?>
-        get() = _checkLocationSettingFailureEvent
+    private val _enabled = MutableLiveData(true)
+    val enabled: LiveData<Boolean> = _enabled
 
-    init {
+    val userAddress = MutableLiveData(Address("","","","",""))
+    val states:Array<String> = application.resources.getStringArray(R.array.states)
+
+    private val _selectedStatePosition = MutableLiveData<Int>()
+    val selectedStatePosition: LiveData<Int> = _selectedStatePosition
+
+    private val _checkLocationSettingFailureEvent = SingleLiveEvent<Exception?>()
+    val checkLocationSettingFailureEvent: SingleLiveEvent<Exception?> =  _checkLocationSettingFailureEvent
+    private val fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(application)
+
+
+    fun getLocation() {
+        _enabled.value = false
         _dataLoading.value = true
-        viewModelScope.launch {
-            val result = representativeRepository.fetchRepresentatives()
-            if (result is Result.Success) {
-                val response = result.data
-                _representativeList.value = response
+        initFusedLocationClient()
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun initFusedLocationClient() {
+        val locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                super.onLocationResult(locationResult)
+                locationResult.let {
+                    geoCodeLocation(it.lastLocation)
+                    fusedLocationClient.removeLocationUpdates(this)
+                }
             }
         }
-        _dataLoading.value = false
+        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 0)
+            .setWaitForAccurateLocation(false)
+            .build()
+        Looper.myLooper()?.let {
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback,
+                it
+            )
+        }
     }
 
     fun checkDeviceLocationSettingsAndFindMyLocation() {
@@ -52,15 +84,76 @@ class RepresentativesViewModel(
             settingClient.checkLocationSettings(locationSettingRequest)
 
         locationSettingResponseTask.addOnCompleteListener {
-            if (it.isSuccessful) findMyLocation()
+            if (it.isSuccessful) getLocation()
         }.addOnFailureListener { exception ->
             _checkLocationSettingFailureEvent.value = exception
-
         }
     }
 
+    private fun geoCodeLocation(location: Location?) {
+        if (location == null) return
+        val geocoder = Geocoder(application, Locale.getDefault())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            geocoder.getFromLocation(location.latitude, location.longitude, 1) { list ->
+                val address = list.map {
+                    Address(
+                        it.thoroughfare,
+                        it.subThoroughfare,
+                        it.locality,
+                        it.adminArea,
+                        it.postalCode
+                    )
+                }.first()
+                setAddress(address)
+            }
+        } else {
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {
+                    @Suppress("DEPRECATION")
+                    val address = geocoder.getFromLocation(
+                        location.latitude,
+                        location.longitude,
+                        1
+                    )?.map {
+                        Address(
+                            it.thoroughfare,
+                            it.subThoroughfare,
+                            it.locality,
+                            it.adminArea,
+                            it.postalCode
+                        )
+                    }?.first()
+                    setAddress(address)
+                }
+            }
 
-    fun findMyLocation() {
+        }
 
     }
+
+    fun setSelectedState(pos:Int) {
+        _selectedStatePosition.value = pos
+    }
+
+    private fun setAddress(address: Address?) {
+        viewModelScope.launch {
+            if (address != null) {
+                userAddress.value = address
+            }
+            _dataLoading.value = false
+            _enabled.value = true
+        }
+    }
 }
+
+/*
+_dataLoading.value = true
+        viewModelScope.launch {
+            val result = representativeRepository.fetchRepresentatives()
+            if (result is Result.Success) {
+                val response = result.data
+                _representativeList.value = response
+            }
+        }
+        _dataLoading.value = false
+ */
