@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,7 +12,7 @@
             type="com.udacity.politicalpreparedness.domain.representative.RepresentativesViewModel" />
     </data>
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/spacing_4dp"
@@ -20,10 +21,11 @@
         <TextView
             android:id="@+id/search_title"
             style="@style/Widget.PoliticalPreparedness.HeaderTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/representative_search"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -93,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="@{viewModel.enabled}"
+            android:onClick="@{() -> viewModel.getRepresentatives()}"
             android:text="@string/find_my_representatives"
             app:layout_constraintTop_toBottomOf="@id/zip" />
 
@@ -116,14 +119,15 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/representatives_recycler_view"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:gravity="center"
-            android:textAlignment="center"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/representative_title" />
+            app:layout_constraintTop_toBottomOf="@id/representative_title"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_representative" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -136,5 +140,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -20,6 +20,7 @@ import com.udacity.politicalpreparedness.BuildConfig
 import com.udacity.politicalpreparedness.R
 import com.udacity.politicalpreparedness.databinding.FragmentRepresentativesBinding
 import com.udacity.politicalpreparedness.util.hasPermission
+import com.udacity.politicalpreparedness.util.showSnackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -69,6 +70,27 @@ class RepresentativesFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+
+        val adapter =
+            RepresentativeListAdapter(object : RepresentativeListAdapter.RepresentativeListener {
+                override fun startIntent(url: String) {
+                    val uri = Uri.parse(url)
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    startActivity(intent)
+                }
+
+            })
+        binding.representativesRecyclerView.adapter = adapter
+
+        viewModel.representativeList.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.submitList(it)
+            }
+        }
+
+        viewModel.snackBarMessageEvent.observe(viewLifecycleOwner) {
+            binding.root.showSnackbar(it)
+        }
         listenLocationSettingRequestResponse()
 
         binding.buttonLocation.setOnClickListener {

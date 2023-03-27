@@ -1,8 +1,11 @@
 package com.udacity.politicalpreparedness.data.domain
 
+import java.util.UUID
+
 data class Representative(
     val official: Official,
     val office: Office,
+    val id: String = UUID.randomUUID().toString(),
 
 )
 

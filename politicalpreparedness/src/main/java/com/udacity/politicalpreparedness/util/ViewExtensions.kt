@@ -1,7 +1,5 @@
 package com.udacity.politicalpreparedness.util
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 

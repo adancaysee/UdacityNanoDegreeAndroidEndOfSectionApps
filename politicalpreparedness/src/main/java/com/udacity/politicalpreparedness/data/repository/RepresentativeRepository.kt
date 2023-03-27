@@ -10,7 +10,7 @@ import com.udacity.politicalpreparedness.data.source.remote.models.asDomain
 
 
 interface RepresentativeRepository {
-    suspend fun fetchRepresentatives(): Result<List<Representative>>
+    suspend fun fetchRepresentatives(address:String): Result<List<Representative>>
 }
 
 class DefaultRepresentativeRepository(
@@ -18,11 +18,11 @@ class DefaultRepresentativeRepository(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : RepresentativeRepository {
 
-    override suspend fun fetchRepresentatives(): Result<List<Representative>> =
+    override suspend fun fetchRepresentatives(address: String): Result<List<Representative>> =
         withContext(dispatcher) {
             return@withContext try {
                 val response =
-                    civicsNetworkDataSource.getRepresentatives("1263 Pacific Ave. Kansas City KS")
+                    civicsNetworkDataSource.getRepresentatives(address)
                 val representatives:List<NetworkRepresentative> = response.offices.flatMap {
                     it.getRepresentatives(response.officials)
                 }

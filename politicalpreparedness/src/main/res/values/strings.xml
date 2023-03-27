@@ -18,5 +18,8 @@
     </string>
     <string name="location_required_error">Location services must be enabled.</string>
     <string name="ok">OK</string>
+    <string name="location_error">You are not in US</string>
+    <string name="location_not_found">Location not found</string>
+    <string name="profile">Profile</string>
 
 </resources>
