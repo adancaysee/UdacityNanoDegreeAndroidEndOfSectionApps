@@ -7,7 +7,7 @@
     app:startDestination="@id/launch_destination">
     <fragment
         android:id="@+id/launch_destination"
-        android:name="com.udacity.locationreminder.domain.launch.LaunchFragment"
+        android:name="com.udacity.locationreminder.domain.launch.LaunchWithAuthFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_launch">
         <action

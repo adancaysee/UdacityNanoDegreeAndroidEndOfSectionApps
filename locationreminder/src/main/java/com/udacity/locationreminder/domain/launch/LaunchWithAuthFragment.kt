@@ -17,7 +17,7 @@ import com.udacity.locationreminder.R
 import com.udacity.locationreminder.databinding.FragmentLaunchBinding
 import com.udacity.locationreminder.util.showSnackbar
 
-class LaunchFragment : Fragment() {
+class LaunchWithAuthFragment : Fragment() {
 
     private lateinit var binding: FragmentLaunchBinding
 
