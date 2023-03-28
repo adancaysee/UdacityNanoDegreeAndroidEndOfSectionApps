@@ -8,6 +8,6 @@
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_large">20sp</dimen>
 
-    <dimen name="socialImageSize">42dp</dimen>
+    <dimen name="socialImageSize">34dp</dimen>
     <dimen name="profileImageSize">60dp</dimen>
 </resources>

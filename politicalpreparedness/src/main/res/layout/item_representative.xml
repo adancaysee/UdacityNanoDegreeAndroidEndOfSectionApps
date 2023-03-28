@@ -22,7 +22,7 @@
             android:id="@+id/profile_imageview"
             android:layout_width="@dimen/profileImageSize"
             android:layout_height="@dimen/profileImageSize"
-            android:layout_marginVertical="@dimen/spacing_4dp"
+            android:layout_marginBottom="@dimen/spacing_8dp"
             android:contentDescription="@string/profile"
             android:scaleType="centerCrop"
             app:imageUrl="@{item.official.photoUrl}"
@@ -35,30 +35,33 @@
         <TextView
             android:id="@+id/textView"
             style="@style/Widget.PoliticalPreparedness.HeaderTextView"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_4dp"
             android:text="@{item.office.name}"
             android:textSize="@dimen/text_size_normal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/profile_imageview"
             app:layout_constraintTop_toTopOf="@id/profile_imageview" />
 
         <TextView
             android:id="@+id/textView2"
             style="@style/Widget.PoliticalPreparedness.ItemTextViewBody"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{item.official.name}"
             android:textAppearance="?attr/textAppearanceBody2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/textView3"
             style="@style/Widget.PoliticalPreparedness.ItemTextViewBody"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{item.official.party}"
+            app:layout_constraintEnd_toStartOf="@+id/www_image"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -68,7 +71,7 @@
             android:layout_width="@dimen/socialImageSize"
             android:layout_height="@dimen/socialImageSize"
             android:contentDescription="@string/browser"
-            android:padding="@dimen/spacing_8dp"
+            android:padding="@dimen/spacing_4dp"
             android:src="@drawable/ic_www"
             app:layout_constraintBottom_toBottomOf="@+id/twitter_image"
             app:layout_constraintEnd_toStartOf="@+id/facebook_image"
@@ -79,7 +82,7 @@
             android:layout_width="@dimen/socialImageSize"
             android:layout_height="@dimen/socialImageSize"
             android:contentDescription="@string/facebook"
-            android:padding="@dimen/spacing_8dp"
+            android:padding="@dimen/spacing_4dp"
             android:src="@drawable/ic_facebook"
             app:layout_constraintBottom_toBottomOf="@+id/twitter_image"
             app:layout_constraintEnd_toStartOf="@+id/twitter_image"
@@ -90,10 +93,16 @@
             android:layout_width="@dimen/socialImageSize"
             android:layout_height="@dimen/socialImageSize"
             android:contentDescription="@string/twitter"
-            android:padding="@dimen/spacing_8dp"
+            android:padding="@dimen/spacing_4dp"
             android:src="@drawable/ic_twitter"
             app:layout_constraintBottom_toBottomOf="@+id/profile_imageview"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="500dp"
+            android:layout_height="1dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
