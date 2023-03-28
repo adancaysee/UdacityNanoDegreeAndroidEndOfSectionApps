@@ -3,9 +3,20 @@
 
     <style name="Widget.PoliticalPreparedness.HeaderTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
-        <item name="android:paddingTop">@dimen/spacing_8dp</item>
-        <item name="android:paddingBottom">@dimen/spacing_8dp</item>
         <item name="android:alpha">0.7</item>
         <item name="android:textSize">23sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="Widget.PoliticalPreparedness.ItemTextViewBody" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+        <item name="android:alpha">0.7</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Widget.PoliticalPreparedness.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="textAllCaps">true</item>
     </style>
 </resources>

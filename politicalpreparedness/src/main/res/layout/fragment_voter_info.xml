@@ -22,11 +22,14 @@
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/spacing_8dp"
             android:paddingVertical="@dimen/spacing_8dp"
+            android:visibility="gone"
             app:fadeVisible="@{!viewModel.isDataAvailable}">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="@dimen/text_size_large"
                 android:text="@string/no_data"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
@@ -35,7 +38,7 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="center"
             app:fadeVisible="@{viewModel.dataLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +56,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimaryVariant"
-                android:padding="@dimen/spacing_16dp"
+                android:paddingVertical="@dimen/spacing_16dp"
+                android:paddingHorizontal="@dimen/spacing_8dp"
                 android:singleLine="true"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="@dimen/text_size_normal"
                 android:text="@{viewModel.voterInfo.election.name}"
                 android:textColor="?attr/colorOnPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_8dp"
+                android:textAppearance="?attr/textAppearanceBody1"
                 android:text="@{viewModel.voterInfo.election.electionDay.toString()}"
                 app:layout_constraintTop_toBottomOf="@id/election_name"
                 tools:text="12 November 2055" />
@@ -76,9 +83,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_16dp"
-                android:paddingVertical="0dp"
                 android:text="@string/election_information"
-                android:textSize="15sp"
+                android:textSize="@dimen/text_size_normal"
                 app:layout_constraintStart_toStartOf="@id/election_date"
                 app:layout_constraintTop_toBottomOf="@id/election_date" />
 
@@ -88,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{()->viewModel.openVotingLocationFinder()}"
                 android:padding="@dimen/spacing_4dp"
+                android:textAppearance="?attr/textAppearanceBody2"
                 android:text="@string/voting_locations"
                 app:layout_constraintStart_toStartOf="@id/election_date"
                 app:layout_constraintTop_toBottomOf="@id/state_header" />
@@ -97,6 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{()->viewModel.openBallotInfo()}"
+                android:textAppearance="?attr/textAppearanceBody2"
                 android:padding="@dimen/spacing_4dp"
                 android:text="@string/ballot_information"
                 app:layout_constraintStart_toStartOf="@id/election_date"
@@ -131,6 +139,7 @@
 
             <Button
                 android:id="@+id/save_election_btn"
+                style="@style/Widget.PoliticalPreparedness.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_16dp"

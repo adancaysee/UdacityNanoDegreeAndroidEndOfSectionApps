@@ -22,35 +22,40 @@
             android:id="@+id/profile_imageview"
             android:layout_width="@dimen/profileImageSize"
             android:layout_height="@dimen/profileImageSize"
-            android:contentDescription="@string/profile"
-            app:imageUrl="@{item.official.photoUrl}"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars"
             android:layout_marginVertical="@dimen/spacing_4dp"
+            android:contentDescription="@string/profile"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{item.official.photoUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
 
         <TextView
             android:id="@+id/textView"
+            style="@style/Widget.PoliticalPreparedness.HeaderTextView"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="@{item.office.name}"
             android:layout_marginStart="@dimen/spacing_4dp"
+            android:text="@{item.office.name}"
+            android:textSize="@dimen/text_size_normal"
             app:layout_constraintStart_toEndOf="@id/profile_imageview"
             app:layout_constraintTop_toTopOf="@id/profile_imageview" />
 
         <TextView
             android:id="@+id/textView2"
+            style="@style/Widget.PoliticalPreparedness.ItemTextViewBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{item.official.name}"
+            android:textAppearance="?attr/textAppearanceBody2"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/textView3"
+            style="@style/Widget.PoliticalPreparedness.ItemTextViewBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{item.official.party}"
@@ -62,9 +67,9 @@
             android:id="@+id/www_image"
             android:layout_width="@dimen/socialImageSize"
             android:layout_height="@dimen/socialImageSize"
+            android:contentDescription="@string/browser"
             android:padding="@dimen/spacing_8dp"
             android:src="@drawable/ic_www"
-            android:contentDescription="@string/browser"
             app:layout_constraintBottom_toBottomOf="@+id/twitter_image"
             app:layout_constraintEnd_toStartOf="@+id/facebook_image"
             app:layout_constraintTop_toTopOf="@+id/twitter_image" />
@@ -73,8 +78,8 @@
             android:id="@+id/facebook_image"
             android:layout_width="@dimen/socialImageSize"
             android:layout_height="@dimen/socialImageSize"
-            android:padding="@dimen/spacing_8dp"
             android:contentDescription="@string/facebook"
+            android:padding="@dimen/spacing_8dp"
             android:src="@drawable/ic_facebook"
             app:layout_constraintBottom_toBottomOf="@+id/twitter_image"
             app:layout_constraintEnd_toStartOf="@+id/twitter_image"
@@ -84,8 +89,8 @@
             android:id="@+id/twitter_image"
             android:layout_width="@dimen/socialImageSize"
             android:layout_height="@dimen/socialImageSize"
-            android:padding="@dimen/spacing_8dp"
             android:contentDescription="@string/twitter"
+            android:padding="@dimen/spacing_8dp"
             android:src="@drawable/ic_twitter"
             app:layout_constraintBottom_toBottomOf="@+id/profile_imageview"
             app:layout_constraintEnd_toEndOf="parent" />

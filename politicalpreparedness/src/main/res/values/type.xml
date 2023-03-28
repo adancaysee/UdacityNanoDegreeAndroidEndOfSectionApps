@@ -13,11 +13,13 @@
     <style name="TextAppearance.PoliticalPreparedness.Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
     </style>
 
     <style name="TextAppearance.PoliticalPreparedness.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
 </resources>
