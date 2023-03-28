@@ -14,7 +14,7 @@
     <string name="representative_search">Representative Search</string>
     <string name="settings">Settings</string>
     <string name="permission_denied_explanation">
-        You need to grant location permission at the all time in order to use your location.
+        Please select at the all time in order to use your location on the setting.
     </string>
     <string name="location_required_error">Location services must be enabled.</string>
     <string name="ok">OK</string>
