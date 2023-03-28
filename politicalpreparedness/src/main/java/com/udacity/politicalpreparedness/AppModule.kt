@@ -45,7 +45,7 @@ val appModule = module {
 
     //ViewModels
     viewModel {
-        ElectionsViewModel(get())
+        ElectionsViewModel(get(),get())
     }
     viewModel {
         VoterInfoViewModel(get(), get())

@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 import com.udacity.politicalpreparedness.data.repository.Result
+import com.udacity.politicalpreparedness.util.isInternetAvailable
 
 
 class RepresentativesViewModel(
@@ -27,6 +28,8 @@ class RepresentativesViewModel(
 
     private val _representativeList = MutableLiveData<List<Representative>>()
     val representativeList = _representativeList
+
+    val empty = Transformations.map(_representativeList) { it.isNullOrEmpty() }
 
     private val _dataLoading = MutableLiveData(false)
     val dataLoading: LiveData<Boolean> = _dataLoading
@@ -47,10 +50,16 @@ class RepresentativesViewModel(
         LocationServices.getFusedLocationProviderClient(application)
     private var locationCallback: LocationCallback? = null
 
+    val isInternetAvailable = MutableLiveData(application.isInternetAvailable())
+
     private val _snackBarMessageEvent = SingleLiveEvent<String>()
     val snackBarMessageEvent = _snackBarMessageEvent
 
     fun getRepresentatives() {
+        if (isInternetAvailable.value == false) {
+            _snackBarMessageEvent.value = application.getString(R.string.check_conn)
+            return
+        }
         _dataLoading.value = true
         viewModelScope.launch {
             val address = userAddress.value

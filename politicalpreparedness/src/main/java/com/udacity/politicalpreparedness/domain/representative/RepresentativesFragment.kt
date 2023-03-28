@@ -20,6 +20,7 @@ import com.udacity.politicalpreparedness.BuildConfig
 import com.udacity.politicalpreparedness.R
 import com.udacity.politicalpreparedness.databinding.FragmentRepresentativesBinding
 import com.udacity.politicalpreparedness.util.hasPermission
+import com.udacity.politicalpreparedness.util.isInternetAvailable
 import com.udacity.politicalpreparedness.util.showSnackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -94,7 +95,12 @@ class RepresentativesFragment : Fragment() {
         listenLocationSettingRequestResponse()
 
         binding.buttonLocation.setOnClickListener {
-            requestForegroundLocationPermissions()
+            if (requireContext().isInternetAvailable()) {
+                requestForegroundLocationPermissions()
+            }else {
+                binding.root.showSnackbar(getString(R.string.check_conn))
+            }
+
         }
 
         return binding.root

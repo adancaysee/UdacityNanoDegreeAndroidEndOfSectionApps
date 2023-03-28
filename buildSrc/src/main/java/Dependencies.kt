@@ -39,7 +39,7 @@ object Libraries {
     const val koinAndroidXNavigation = "io.insert-koin:koin-androidx-navigation:${Versions.koinVersion}"
 
     //Glide
-    const val glide = "com.github.bumptech.glide:glide:4.14.2"
+    const val glide = "com.github.bumptech.glide:glide:4.15.1"
 
     //Kotlin Serialization
     const val kotlinxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"

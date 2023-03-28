@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="androidx.core.content.ContextCompat" />
         <variable
             name="viewModel"
             type="com.udacity.politicalpreparedness.domain.elections.ElectionsViewModel" />
@@ -70,6 +70,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_connection_error"
+            app:fadeVisible="@{!viewModel.isInternetAvailable}"
+            android:contentDescription="@string/network_connection_error"
+            app:layout_constraintStart_toStartOf="@id/no_data_text_view"
+            app:layout_constraintEnd_toEndOf="@id/no_data_text_view"
+            app:layout_constraintTop_toTopOf="@id/no_data_text_view"
+            app:layout_constraintBottom_toBottomOf="@id/no_data_text_view"/>
 
         <ProgressBar
             android:id="@+id/progressBar"

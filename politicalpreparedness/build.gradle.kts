@@ -69,7 +69,7 @@ dependencies {
     //Coil
     implementation(Libraries.coil)
 
-    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(Libraries.glide)
 
     implementation(Libraries.playServicesLocation)
 
