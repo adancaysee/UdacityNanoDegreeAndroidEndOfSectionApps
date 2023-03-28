@@ -21,5 +21,11 @@
     <string name="location_error">You are not in US</string>
     <string name="location_not_found">Location not found</string>
     <string name="profile">Profile</string>
+    <string name="election_information">Election Information</string>
+    <string name="follow_election">Follow Election</string>
+    <string name="unfollow_election">Unfollow Election</string>
+    <string name="ballot_information">Ballot Information</string>
+    <string name="voting_locations">Voting Locations</string>
+    <string name="mailing_address">Mailing Address</string>
 
 </resources>

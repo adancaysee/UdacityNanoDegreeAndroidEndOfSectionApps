@@ -1,47 +1,44 @@
 package com.udacity.politicalpreparedness.data.source.remote.models
 
 import com.squareup.moshi.JsonClass
-import com.squareup.moshi.Json
-import com.udacity.politicalpreparedness.data.domain.Contest
-import com.udacity.politicalpreparedness.data.domain.PollingLocation
 import com.udacity.politicalpreparedness.data.domain.VoterInfo
+
 
 @JsonClass(generateAdapter = true)
 class NetworkVoterInfoResponse(
     val election: NetworkElection,
-    val pollingLocations: List<NetworkPollingLocation>? = null, //TODO: Future Use
-    val contests: List<NetworkContest>? = null, //TODO: Future Use
-    val state: List<NetworkState>? = null,
-    val electionElectionOfficials: List<NetworkElectionOfficial>? = null
+    val kind: String?,
+    val normalizedInput: NetworkAddress?,
+    val state: List<NetworkState>?
 )
-data class NetworkPollingLocation(val address: NetworkAddress, val pollingHours: String)
 
-data class NetworkContest(@Json(name = "type") val type: String, val office: String?)
+fun NetworkVoterInfoResponse.asDomain():VoterInfo = VoterInfo(
+    election = election.asDomain(),
+    ballotInfoUrl = state?.get(0)?.electionAdministrationBody?.ballotInfoUrl,
+    votingLocationFinderUrl = state?.get(0)?.electionAdministrationBody?.votingLocationFinderUrl
+
+)
+
+
 
 data class NetworkState(
+    val electionAdministrationBody: NetworkElectionAdministrationBody?,
+    val name: String?,
+    val sources: List<NetworkSource>?
+)
+
+
+data class NetworkElectionAdministrationBody(
+    val absenteeVotingInfoUrl: String?,
+    val ballotInfoUrl: String?,
+    val electionInfoUrl: String?,
+    val electionRegistrationConfirmationUrl: String?,
+    val electionRegistrationUrl: String?,
+    val name: String?,
+    val votingLocationFinderUrl: String?
+)
+
+data class NetworkSource(
     val name: String,
-    val electionAdministrationBody: NetworkAdministrationBody
-)
-
-@JsonClass(generateAdapter = true)
-data class NetworkAdministrationBody(
-    val name: String? = null,
-    val electionInfoUrl: String? = null,
-    val votingLocationFinderUrl: String? = null,
-    val ballotInfoUrl: String? = null,
-    val correspondenceAddress: NetworkAddress? = null
-)
-
-fun List<NetworkPollingLocation>.asDomain(): List<PollingLocation> = map {
-    PollingLocation(it.address, it.pollingHours)
-}
-
-/*fun List<Contest>.asDomain(): List<Contest> = map {
-    Contest(it.type, it.office)
-}*/
-
-fun NetworkVoterInfoResponse.asDomain() = VoterInfo(
-    election = this.election.asDomain(),
-    pollingLocations = this.pollingLocations?.asDomain(),
-    //contests = this.contests?.asDomain()
+    val official: Boolean
 )

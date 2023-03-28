@@ -3,11 +3,11 @@ package com.udacity.politicalpreparedness.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.udacity.politicalpreparedness.data.domain.Election
+import com.udacity.politicalpreparedness.data.domain.asDatabase
 import com.udacity.politicalpreparedness.data.source.local.ElectionsDao
 import com.udacity.politicalpreparedness.data.source.remote.CivicsNetworkDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import com.udacity.politicalpreparedness.data.source.local.ElectionEntity
 import com.udacity.politicalpreparedness.data.source.local.asDomain
 import com.udacity.politicalpreparedness.data.source.remote.models.asDomain
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +18,7 @@ interface ElectionRepository {
 
     fun observeSavedElections(): LiveData<List<Election>?>
 
-    suspend fun saveElection(electionEntity: ElectionEntity)
+    suspend fun saveElection(election: Election)
 
     fun observeSavedElection(electionId: Int): LiveData<Election?>
 
@@ -49,8 +49,8 @@ class DefaultElectionRepository(
             it?.asDomain()
         }
 
-    override suspend fun saveElection(electionEntity: ElectionEntity) = withContext(dispatcher) {
-        electionsDao.saveElection(electionEntity)
+    override suspend fun saveElection(election: Election) = withContext(dispatcher) {
+        electionsDao.saveElection(election.asDatabase())
     }
 
     override fun observeSavedElection(electionId: Int): LiveData<Election?> =

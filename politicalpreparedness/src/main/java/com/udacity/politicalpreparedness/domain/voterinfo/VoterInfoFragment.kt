@@ -1,5 +1,7 @@
 package com.udacity.politicalpreparedness.domain.voterinfo
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +25,18 @@ class VoterInfoFragment : Fragment() {
     ): View {
         binding = FragmentVoterInfoBinding.inflate(inflater)
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         viewModel.setParameters(args.argElectionId, args.argDivision)
+
+        viewModel.openUrlEvent.observe(viewLifecycleOwner) {
+            it?.let { url ->
+                val uri = Uri.parse(url)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(intent)
+            }
+        }
 
         return binding.root
     }

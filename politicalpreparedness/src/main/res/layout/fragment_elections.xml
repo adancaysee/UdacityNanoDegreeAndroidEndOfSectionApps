@@ -5,8 +5,6 @@
 
     <data>
 
-        <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.udacity.politicalpreparedness.domain.elections.ElectionsViewModel" />
@@ -66,7 +64,7 @@
             android:gravity="center"
             android:text="@string/no_data"
             android:textSize="@dimen/text_size_large"
-            android:visibility="@{viewModel.empty ? View.VISIBLE : View.GONE}"
+            app:fadeVisible="@{viewModel.empty}"
             app:drawableTopCompat="@drawable/ic_no_data"
             app:layout_constraintBottom_toBottomOf="@+id/elections_recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
