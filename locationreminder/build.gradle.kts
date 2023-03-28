@@ -71,6 +71,7 @@ dependencies {
 
     //Google Map
     implementation(Libraries.playServicesMaps)
+    implementation(Libraries.playServicesLocation)
 
     testImplementation(TestLibraries.junit)
     androidTestImplementation(TestLibraries.androidXJunitKtx)

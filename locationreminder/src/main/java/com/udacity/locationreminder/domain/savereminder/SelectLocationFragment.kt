@@ -35,7 +35,6 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         return binding.root
     }
 
-
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
@@ -44,4 +43,6 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
+
+
 }

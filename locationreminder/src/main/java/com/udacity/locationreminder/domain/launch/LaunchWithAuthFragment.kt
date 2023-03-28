@@ -56,7 +56,7 @@ class LaunchWithAuthFragment : Fragment() {
     }
 
     private fun navigateToReminders() {
-        findNavController().navigate(LaunchFragmentDirections.actionOpenReminders())
+        findNavController().navigate(LaunchWithAuthFragmentDirections.actionOpenReminders())
     }
 
     private fun launchSignInIntent() {

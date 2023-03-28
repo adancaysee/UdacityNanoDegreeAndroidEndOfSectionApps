@@ -6,4 +6,6 @@ import com.udacity.locationreminder.data.source.repository.ReminderRepository
 
 class ReminderListViewModel(application: Application, reminderRepository: ReminderRepository) :
     BaseViewModel(application) {
+
+
 }
