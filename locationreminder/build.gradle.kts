@@ -66,7 +66,8 @@ dependencies {
     //Firebase
     implementation(platform(Libraries.firebaseBom))
     implementation(Libraries.firebaseAuthKtx)
-    implementation(Libraries.firebaseMessagingKtx)
+    implementation(Libraries.gmsPlayServicesAuth)
+    implementation(Libraries.firebaseUIAuth)
 
     //Google Map
     implementation(Libraries.playServicesMaps)

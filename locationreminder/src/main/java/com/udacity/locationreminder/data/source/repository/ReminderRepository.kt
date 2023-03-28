@@ -1,15 +1,27 @@
-package com.udacity.locationreminder.data.source
+package com.udacity.locationreminder.data.source.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.udacity.locationreminder.data.domain.Reminder
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import com.udacity.locationreminder.data.domain.Result
 import com.udacity.locationreminder.data.domain.asDatabase
 import com.udacity.locationreminder.data.source.local.RemindersDao
 import com.udacity.locationreminder.data.source.local.asDomain
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+
+interface ReminderRepository {
+    fun observeReminders(): LiveData<List<Reminder>?>
+
+    suspend fun getReminders(): Result<List<Reminder>>
+
+    suspend fun saveReminder(reminder: Reminder)
+
+    suspend fun getReminder(id: String): Result<Reminder>
+
+    suspend fun deleteAllReminders()
+}
 
 class DefaultReminderRepository(
     private val remindersDao: RemindersDao,

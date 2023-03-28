@@ -60,9 +60,11 @@ object Libraries {
     const val firebaseBom = "com.google.firebase:firebase-bom:31.2.2"
     const val firebaseMessagingKtx = "com.google.firebase:firebase-messaging-ktx"
     const val firebaseAuthKtx = "com.google.firebase:firebase-auth-ktx"
+    const val firebaseUIAuth = "com.firebaseui:firebase-ui-auth:7.2.0"
 
-    //Google Map
+    //Google Play Services
     const val playServicesMaps = "com.google.android.gms:play-services-maps:18.0.2"
+    const val gmsPlayServicesAuth = "com.google.android.gms:play-services-auth:20.4.1"
     const val playServicesLocation = "com.google.android.gms:play-services-location:21.0.1"
 
 }

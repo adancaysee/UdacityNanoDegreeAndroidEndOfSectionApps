@@ -1,8 +1,8 @@
 package com.udacity.locationreminder
 
 import androidx.room.Room
-import com.udacity.locationreminder.data.source.DefaultReminderRepository
-import com.udacity.locationreminder.data.source.ReminderRepository
+import com.udacity.locationreminder.data.source.repository.DefaultReminderRepository
+import com.udacity.locationreminder.data.source.repository.ReminderRepository
 import com.udacity.locationreminder.data.source.local.RemindersDatabase
 import com.udacity.locationreminder.domain.reminderdetail.ReminderDetailViewModel
 import com.udacity.locationreminder.domain.reminderlist.ReminderListViewModel
@@ -32,15 +32,13 @@ val reminderAppModule = module {
 
     includes(databaseKoinModule)
 
-    /** Default Repository */
-    single {
-        DefaultReminderRepository(
-            get()
-        )
+    //Default Repository
+    single<ReminderRepository> {
+        DefaultReminderRepository(get())
     }
 
 
-    /** viewModels */
+    // viewModels
     viewModel {
         ReminderListViewModel(get(), (get() as ReminderRepository))
     }
