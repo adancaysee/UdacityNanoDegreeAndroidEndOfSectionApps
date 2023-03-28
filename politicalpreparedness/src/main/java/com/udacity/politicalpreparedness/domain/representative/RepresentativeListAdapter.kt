@@ -83,7 +83,7 @@ class RepresentativeListAdapter(private val clickListener: RepresentativeListene
 
             fun from(parent: ViewGroup): ViewHolder {
                 val inflater = LayoutInflater.from(parent.context)
-                val binding = ItemRepresentativeBinding.inflate(inflater)
+                val binding = ItemRepresentativeBinding.inflate(inflater,parent,false)
                 return ViewHolder(binding)
             }
         }

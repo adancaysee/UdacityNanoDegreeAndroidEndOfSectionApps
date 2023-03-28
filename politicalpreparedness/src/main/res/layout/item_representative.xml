@@ -98,12 +98,5 @@
             app:layout_constraintBottom_toBottomOf="@+id/profile_imageview"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <View
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="500dp"
-            android:layout_height="1dp"/>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
