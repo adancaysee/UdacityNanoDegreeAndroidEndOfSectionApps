@@ -1,4 +1,4 @@
-package com.udacity.locationreminder.savereminder
+package com.udacity.locationreminder.domain.savereminder
 
 import android.os.Bundle
 import android.view.LayoutInflater

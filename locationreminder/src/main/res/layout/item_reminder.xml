@@ -10,7 +10,7 @@
 
         <variable
             name="onClickListener"
-            type="com.udacity.locationreminder.reminderlist.RemindersListAdapter.OnClickListener" />
+            type="com.udacity.locationreminder.domain.reminderlist.RemindersListAdapter.OnClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView

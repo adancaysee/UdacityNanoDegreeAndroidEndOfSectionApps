@@ -1,4 +1,4 @@
-package com.udacity.locationreminder.reminderlist
+package com.udacity.locationreminder.domain.reminderlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.udacity.locationreminder.reminderdetail
+package com.udacity.locationreminder.domain.reminderdetail
 
 import android.app.Application
 import com.udacity.locationreminder.base.BaseViewModel

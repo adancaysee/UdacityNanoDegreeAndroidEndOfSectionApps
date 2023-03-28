@@ -4,9 +4,9 @@ import androidx.room.Room
 import com.udacity.locationreminder.data.source.DefaultReminderRepository
 import com.udacity.locationreminder.data.source.ReminderRepository
 import com.udacity.locationreminder.data.source.local.RemindersDatabase
-import com.udacity.locationreminder.reminderdetail.ReminderDetailViewModel
-import com.udacity.locationreminder.reminderlist.ReminderListViewModel
-import com.udacity.locationreminder.savereminder.SaveReminderViewModel
+import com.udacity.locationreminder.domain.reminderdetail.ReminderDetailViewModel
+import com.udacity.locationreminder.domain.reminderlist.ReminderListViewModel
+import com.udacity.locationreminder.domain.savereminder.SaveReminderViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
