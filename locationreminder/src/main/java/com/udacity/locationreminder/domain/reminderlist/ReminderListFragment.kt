@@ -68,6 +68,8 @@ class ReminderListFragment : BaseFragment(), MenuProvider {
         super.onStart()
         if (!checkAllLocationPermissions()) {
             requestLocationPermissions()
+        } else {
+            requestNotificationPermission()
         }
     }
 
@@ -123,10 +125,13 @@ class ReminderListFragment : BaseFragment(), MenuProvider {
     }
 
     private fun requestBackgroundLocationPermission() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            requestNotificationPermission()
+            return
+        }
         when {
             requireActivity().hasPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION) -> {
-                Timber.d("All permissions granted")
+                requestNotificationPermission()
             }
             shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION) -> {
                 showOpenBackgroundPermissionSnackbar()
@@ -178,5 +183,12 @@ class ReminderListFragment : BaseFragment(), MenuProvider {
         }.show()
     }
 
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+            && !requireContext().hasPermission(Manifest.permission.POST_NOTIFICATIONS)
+        ) {
+            requestPermissionLauncher.launch(arrayOf(Manifest.permission.POST_NOTIFICATIONS))
+        }
+    }
 
 }
