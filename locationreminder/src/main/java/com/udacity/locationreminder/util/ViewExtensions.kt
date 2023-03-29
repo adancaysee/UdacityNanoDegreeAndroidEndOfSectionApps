@@ -15,7 +15,7 @@ fun View.showSnackbar(snackbarText: String, timeLength: Int = Snackbar.LENGTH_LO
 fun View.fadeIn() {
     this.visibility = View.VISIBLE
     this.alpha = 0f
-    this.animate().alpha(1f).setDuration(10000).setListener(object : AnimatorListenerAdapter() {
+    this.animate().alpha(1f).setListener(object : AnimatorListenerAdapter() {
         override fun onAnimationEnd(animation: Animator) {
             this@fadeIn.alpha = 1f
         }

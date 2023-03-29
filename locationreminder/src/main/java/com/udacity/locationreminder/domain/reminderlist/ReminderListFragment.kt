@@ -55,6 +55,7 @@ class ReminderListFragment : BaseFragment(), MenuProvider {
     ): View {
         val host: MenuHost = requireActivity()
         host.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
         binding = FragmentRemindersListBinding.inflate(inflater)
 
         binding.addReminderFab.setOnClickListener {

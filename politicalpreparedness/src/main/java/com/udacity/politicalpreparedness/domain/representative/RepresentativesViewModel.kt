@@ -196,6 +196,5 @@ class RepresentativesViewModel(
         if (locationCallback != null) {
             fusedLocationClient.removeLocationUpdates(locationCallback!!)
         }
-
     }
 }

@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.udacity.locationreminder.domain.savereminder.SaveReminderViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,16 +21,18 @@
             app:layout_constraintBottom_toTopOf="@id/save_location_btn"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/save_location_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="?attr/colorSecondary"
             android:insetTop="0dp"
             android:insetBottom="0dp"
+            android:onClick="@{() -> viewModel.saveLocation()}"
             android:text="@string/save"
             android:textColor="?attr/colorOnSecondary"
             app:cornerRadius="0dp"
+            app:fadeVisible="@{viewModel.isSaveActive}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

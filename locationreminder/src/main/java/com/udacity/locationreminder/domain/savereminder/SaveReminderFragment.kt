@@ -8,7 +8,12 @@ import android.view.ViewGroup
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.Priority
 import com.google.android.material.snackbar.Snackbar
 import com.udacity.locationreminder.R
 import com.udacity.locationreminder.base.BaseFragment
@@ -24,56 +29,72 @@ class SaveReminderFragment : BaseFragment() {
     private val resolutionForResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
     ) { activityResult ->
-        if (activityResult.resultCode == AppCompatActivity.RESULT_OK) {
-            Timber.d("Ok")
-        } else {
+        if (activityResult.resultCode == AppCompatActivity.RESULT_CANCELED) {
             showLocationSettingSnackbar()
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentSaveReminderBinding.inflate(inflater)
 
-        listenLocationSettingRequestResponse()
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.selectLocation.setOnClickListener {
-            viewModel.checkDeviceLocationSettingsAndFindMyLocation()
+            checkDeviceLocationSettings()
+        }
+
+        viewModel.navigateReminderListEvent.observe(viewLifecycleOwner) {
+            findNavController().navigate(SaveReminderFragmentDirections.actionSaveReminderDestinationToRemindersDestination())
         }
 
         return binding.root
 
     }
 
-    private fun listenLocationSettingRequestResponse() {
-        viewModel.checkLocationSettingFailureEvent.observe(viewLifecycleOwner) {
-            it?.let { exception ->
-                if (exception is ResolvableApiException) {
-                    try {
-                        resolutionForResultLauncher.launch(
-                            IntentSenderRequest.Builder(exception.resolution).build()
-                        )
-                    } catch (sendEx: IntentSender.SendIntentException) {
-                        Timber.d("Error geting location settings resolution: " + sendEx.message)
-                    }
-                } else {
-                    showLocationSettingSnackbar()
+    private fun navigateToMap() {
+        findNavController().navigate(SaveReminderFragmentDirections.actionSelectLocation())
+    }
+
+    private fun checkDeviceLocationSettings() {
+        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_LOW_POWER, 10000)
+            .build()
+
+        val locationSettingRequest =
+            LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+                .build()
+
+        val settingClient = LocationServices.getSettingsClient(requireContext())
+        val locationSettingResponseTask =
+            settingClient.checkLocationSettings(locationSettingRequest)
+
+        locationSettingResponseTask.addOnCompleteListener {
+            if (it.isSuccessful) {
+                navigateToMap()
+            }
+        }.addOnFailureListener { exception ->
+            if (exception is ResolvableApiException) {
+                try {
+                    resolutionForResultLauncher.launch(
+                        IntentSenderRequest.Builder(exception.resolution).build()
+                    )
+                } catch (sendEx: IntentSender.SendIntentException) {
+                    Timber.d("Error geting location settings resolution: " + sendEx.message)
                 }
+            } else {
+                showLocationSettingSnackbar()
             }
         }
     }
 
     private fun showLocationSettingSnackbar() {
         Snackbar.make(
-            binding.root,
-            R.string.location_required_error,
-            Snackbar.LENGTH_INDEFINITE
+            binding.root, R.string.location_required_error, Snackbar.LENGTH_INDEFINITE
         ).apply {
             setAction(R.string.ok) {
-                viewModel.checkDeviceLocationSettingsAndFindMyLocation()
+                checkDeviceLocationSettings()
             }
         }.show()
     }

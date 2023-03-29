@@ -6,4 +6,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="geofence_circle_fill_color">#800D72C1</color>
+
 </resources>
