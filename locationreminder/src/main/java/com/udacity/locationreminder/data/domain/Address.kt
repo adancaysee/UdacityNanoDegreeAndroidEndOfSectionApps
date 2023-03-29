@@ -5,11 +5,11 @@ import android.location.LocationManager
 import com.google.android.gms.maps.model.LatLng
 
 data class Address(
-    var line1: String?,
+    var line1: String? = null,
     var line2: String? = null,
-    var city: String?,
-    var state: String?,
-    var zip: String?,
+    var city: String? = null,
+    var state: String? = null,
+    var zip: String? = null,
     var location: Location,
 ) {
     fun getSnippet():String {
@@ -17,7 +17,7 @@ data class Address(
         if (line2 != null) return line2!!
         if (state != null) return state!!
         if (city != null) return city!!
-        return ""
+        return "-"
     }
 }
 

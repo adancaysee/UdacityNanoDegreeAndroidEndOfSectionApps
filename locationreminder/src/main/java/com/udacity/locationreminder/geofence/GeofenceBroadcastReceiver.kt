@@ -3,20 +3,45 @@ package com.udacity.locationreminder.geofence
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-
-/**
- * Triggered by the Geofence.  Since we can have many Geofences at once, we pull the request
- * ID from the first Geofence, and locate it within the cached data in our Room DB
- *
- * Or users can add the reminders and then close the app, So our app has to run in the background
- * and handle the geofencing in the background.
- * To do that you can use https://developer.android.com/reference/android/support/v4/app/JobIntentService to do that.
- *
- */
+import android.widget.Toast
+import androidx.work.*
+import com.google.android.gms.location.Geofence
+import com.google.android.gms.location.GeofencingEvent
 
 class GeofenceBroadcastReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(context: Context?, intent: Intent?) {
+        if (intent == null || context == null) {
+            return
+        }
+        if (intent.action == GeofenceHelper.ACTION_GEOFENCE_EVENT) {
+            val geofencingEvent = GeofencingEvent.fromIntent(intent)
+            if (geofencingEvent == null || geofencingEvent.hasError()) {
+                return
+            }
+            Toast.makeText(context,"triggered",Toast.LENGTH_LONG).show()
+            if (geofencingEvent.geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
+                geofencingEvent.triggeringGeofences?.let {
+                    runWork(context,it)
+                }
+            }
+        }
 
+    }
+    private fun runWork(context: Context, geofences: MutableList<Geofence>) {
+        val list = geofences.map { it.requestId }
+        val data = Data.Builder()
+        data.putStringArray("geofences", list.toTypedArray())
+
+
+        val request = OneTimeWorkRequestBuilder<GeofenceWorker>()
+            .setInputData(data.build())
+            .build()
+
+        WorkManager.getInstance(context).enqueueUniqueWork(
+            GeofenceWorker.WORK_NAME,
+            ExistingWorkPolicy.KEEP,
+            request
+        )
 
     }
 }

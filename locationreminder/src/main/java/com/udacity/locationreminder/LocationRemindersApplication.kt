@@ -1,7 +1,7 @@
 package com.udacity.locationreminder
 
 import android.app.Application
-import com.udacity.locationreminder.util.createNotificationChannel
+import com.udacity.locationreminder.geofence.createNotificationChannel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber

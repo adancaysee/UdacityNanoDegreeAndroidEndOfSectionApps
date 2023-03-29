@@ -8,9 +8,9 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.*
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
@@ -18,7 +18,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.Circle
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
 import com.udacity.locationreminder.BuildConfig
@@ -29,13 +32,15 @@ import com.udacity.locationreminder.data.domain.getLocation
 import com.udacity.locationreminder.databinding.FragmentSelectLocationBinding
 import com.udacity.locationreminder.util.hasPermission
 import org.koin.android.ext.android.inject
-import timber.log.Timber
 
 class SelectLocationFragment : BaseFragment(), OnMapReadyCallback, MenuProvider {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: FragmentSelectLocationBinding
     override val viewModel: SaveReminderViewModel by inject()
+
+    private var currentMarker:Marker? = null
+    private var currentCircle:Circle? = null
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -51,11 +56,8 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback, MenuProvider 
                 showOpenPermissionSettingSnackbar()
             }
             permissions[Manifest.permission.ACCESS_BACKGROUND_LOCATION] == true -> {
-                Toast.makeText(requireContext(), "All permissions are granted", Toast.LENGTH_LONG)
-                    .show()
-                Timber.d("All permissions are granted")
+                setupCurrentLocation()
             }
-
         }
     }
 
@@ -76,7 +78,13 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback, MenuProvider 
 
         viewModel.selectedAddress.observe(viewLifecycleOwner) {
             it?.location?.let { location ->
-                addGeofenceMarker(location.getLatLng(), it.getSnippet())
+                addGeofenceMarker(location.getLatLng(), it.getSnippet(),false)
+            }
+        }
+
+        viewModel.currentAddress.observe(viewLifecycleOwner) {
+            it?.location?.let { location ->
+                moveCamera(location.getLatLng())
             }
         }
         return binding.root
@@ -101,7 +109,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback, MenuProvider 
         mMap.isMyLocationEnabled = true
         viewModel.reminder.value?.let {
             if (it.latLng != null) {
-                addGeofenceMarker(it.latLng,it.locationSnippet)
+                addGeofenceMarker(it.latLng,it.locationSnippet,true)
             }else{
                 viewModel.initFusedLocationClient()
             }
@@ -109,24 +117,30 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback, MenuProvider 
 
     }
 
-    private fun addGeofenceMarker(latLng: LatLng, snippet: String?) {
+    private fun addGeofenceMarker(latLng: LatLng, snippet: String?,isCameraUpdate:Boolean) {
         if (!::mMap.isInitialized) return
         if(latLng.latitude == 0.0 || latLng.longitude == 0.0) return
-        mMap.addMarker(MarkerOptions().position(latLng).title(snippet ?: ""))
-        /*val circleOptions = CircleOptions().apply {
+        currentMarker = mMap.addMarker(MarkerOptions().position(latLng).title(snippet ?: ""))
+        val circleOptions = CircleOptions().apply {
             center(latLng)
-            radius(GeofenceHelper.GEOFENCE_RADIUS)
+            radius(200.0)
             strokeColor(ContextCompat.getColor(requireContext(), android.R.color.transparent))
             fillColor(ContextCompat.getColor(requireContext(), R.color.geofence_circle_fill_color))
         }
-        mMap.addCircle(circleOptions)*/
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16f))
+        currentCircle = mMap.addCircle(circleOptions)
+        if (isCameraUpdate) moveCamera(latLng)
+    }
 
+    private fun moveCamera(latLng: LatLng) {
+        if (!::mMap.isInitialized) return
+        if(latLng.latitude == 0.0 || latLng.longitude == 0.0) return
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.5f))
     }
 
     private fun clearMap() {
         if (::mMap.isInitialized) {
-            mMap.clear()
+            if (currentMarker != null)  currentMarker!!.remove()
+            if (currentCircle != null) currentCircle!!.remove()
             viewModel.clearGeofence()
         }
     }

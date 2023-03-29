@@ -1,46 +1,51 @@
-package com.udacity.locationreminder.util
+package com.udacity.locationreminder.geofence
 
-import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
-import android.os.Bundle
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.udacity.locationreminder.BuildConfig
 import com.udacity.locationreminder.R
+import com.udacity.locationreminder.data.domain.Reminder
 
 private const val NOTIFICATION_CHANNEL_ID = BuildConfig.APPLICATION_ID + ".channel"
 
-fun NotificationManager.sendNotification(
+fun sendReminderNotification(
     context: Context,
-    title: String,
-    body: String,
-    args: Bundle,
+    reminder: Reminder,
 ) {
+    val notificationManager = getNotificationManager(context)
     val stackBuilder = NavDeepLinkBuilder(context)
         .setGraph(R.navigation.nav_graph)
         .setDestination(R.id.reminder_detail_destination)
-        .setArguments(args)
         .createTaskStackBuilder()
 
+    val flag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        PendingIntent.FLAG_MUTABLE
+    } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
+    }
+
     val pendingIntent =
-        stackBuilder.getPendingIntent(getUniqueId(), PendingIntent.FLAG_UPDATE_CURRENT)
+        stackBuilder.getPendingIntent(getUniqueId(), flag)
 
     val notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID).apply {
-        setContentTitle(title)
-        setContentText(body)
+        setContentTitle(reminder.title)
+        setContentText(reminder.locationSnippet)
         setSmallIcon(R.mipmap.ic_launcher)
         setContentIntent(pendingIntent)
         setAutoCancel(true)
     }.build()
 
-    notify(getUniqueId(), notification)
+    notificationManager.notify(getUniqueId(), notification)
 
 }
 
@@ -71,13 +76,3 @@ fun createNotificationChannel(
 
 fun getNotificationManager(context: Context): NotificationManager =
     context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-fun hasNotificationPermission(applicationContext: Context) =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        ContextCompat.checkSelfPermission(
-            applicationContext,
-            Manifest.permission.POST_NOTIFICATIONS
-        ) == PackageManager.PERMISSION_GRANTED
-    } else {
-        true
-    }

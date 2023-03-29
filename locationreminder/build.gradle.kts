@@ -70,6 +70,8 @@ dependencies {
     implementation(Libraries.gmsPlayServicesAuth)
     implementation(Libraries.firebaseUIAuth)
 
+    implementation(Libraries.workManagerKtx)
+
     //Google Map
     implementation(Libraries.playServicesMaps)
     implementation(Libraries.playServicesLocation)

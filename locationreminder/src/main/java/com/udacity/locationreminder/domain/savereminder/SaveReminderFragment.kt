@@ -45,9 +45,7 @@ class SaveReminderFragment : BaseFragment() {
         binding.selectLocation.setOnClickListener {
             checkDeviceLocationSettings()
         }
-
         return binding.root
-
     }
 
     private fun navigateToMap() {
