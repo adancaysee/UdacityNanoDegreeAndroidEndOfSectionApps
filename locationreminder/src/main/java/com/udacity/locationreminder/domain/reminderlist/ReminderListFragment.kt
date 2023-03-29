@@ -51,7 +51,7 @@ class ReminderListFragment : BaseFragment(), MenuProvider {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val adapter = RemindersListAdapter(RemindersListAdapter.OnClickListener {
-            viewModel.navigateToReminderDetail(NavigationCommand.To(ReminderListFragmentDirections.actionOpenDetail()))
+            viewModel.navigateToReminderDetail(NavigationCommand.To(ReminderListFragmentDirections.actionOpenDetail(it.id)))
         })
         binding.remindersRecyclerView.adapter = adapter
         viewModel.reminders.observe(viewLifecycleOwner) {

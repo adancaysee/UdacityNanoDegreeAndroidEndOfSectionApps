@@ -43,7 +43,7 @@ val reminderAppModule = module {
         ReminderListViewModel(get(), (get() as ReminderRepository))
     }
     viewModel {
-        ReminderDetailViewModel(get())
+        ReminderDetailViewModel(get(),get())
     }
     single {
         SaveReminderViewModel(get(), (get() as ReminderRepository))

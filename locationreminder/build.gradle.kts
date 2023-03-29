@@ -77,6 +77,26 @@ dependencies {
     implementation(Libraries.playServicesLocation)
 
     testImplementation(TestLibraries.junit)
+    testImplementation(TestLibraries.androidXJunitKtx)
+    testImplementation(TestLibraries.androidXTestCoreKtx)
+    testImplementation(TestLibraries.androidXArchCoreTesting)
+    testImplementation(TestLibraries.robolectric)
+    testImplementation(TestLibraries.truth)
+    testImplementation(TestLibraries.coroutine)
+    testImplementation(TestLibraries.koinTest)
+    testImplementation(TestLibraries.koinTestJUnit4)
+
     androidTestImplementation(TestLibraries.androidXJunitKtx)
+    androidTestImplementation(TestLibraries.androidXArchCoreTesting)
     androidTestImplementation(TestLibraries.espressoCore)
+    androidTestImplementation(TestLibraries.espressoContrib)
+    androidTestImplementation(TestLibraries.mockitoAndroid)
+    androidTestImplementation(TestLibraries.coroutine)
+    androidTestImplementation(TestLibraries.truth)
+    androidTestImplementation(TestLibraries.koinTest)
+    androidTestImplementation(TestLibraries.koinTestJUnit4)
+
+    debugImplementation(TestLibraries.fragmentTesting)
+    debugImplementation(TestLibraries.androidXTestCoreKtx)
+
 }

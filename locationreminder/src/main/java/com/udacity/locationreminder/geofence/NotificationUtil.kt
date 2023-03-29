@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.udacity.locationreminder.BuildConfig
@@ -13,14 +14,19 @@ import com.udacity.locationreminder.R
 import com.udacity.locationreminder.data.domain.Reminder
 
 private const val NOTIFICATION_CHANNEL_ID = BuildConfig.APPLICATION_ID + ".channel"
+private const val REMINDER_ID = "reminderId"
 
 fun sendReminderNotification(
     context: Context,
     reminder: Reminder,
 ) {
+    val args = Bundle()
+    args.putString(REMINDER_ID, reminder.id)
+
     val notificationManager = getNotificationManager(context)
     val stackBuilder = NavDeepLinkBuilder(context)
         .setGraph(R.navigation.nav_graph)
+        .setArguments(args)
         .setDestination(R.id.reminder_detail_destination)
         .createTaskStackBuilder()
 

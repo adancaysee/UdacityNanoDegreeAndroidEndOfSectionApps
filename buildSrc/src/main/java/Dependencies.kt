@@ -89,6 +89,8 @@ object TestLibraries {
     const val truth = "com.google.truth:truth:1.1.3"
 
     const val koinTestJUnit4 = "io.insert-koin:koin-test-junit4:${Versions.koinVersion}"
+    const val koinTest = "io.insert-koin:koin-test:3.3.3"
+
 
     const val fragmentTesting = "androidx.fragment:fragment-testing:1.5.5"
 }

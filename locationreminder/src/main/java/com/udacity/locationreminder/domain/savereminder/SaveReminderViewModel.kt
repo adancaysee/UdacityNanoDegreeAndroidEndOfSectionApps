@@ -180,7 +180,7 @@ class SaveReminderViewModel(
         }
     }
 
-    private fun validateEnteredData(reminder: Reminder): Boolean {
+    fun validateEnteredData(reminder: Reminder): Boolean {
         if (reminder.title.isNullOrEmpty()) {
             showSnackBarIntEvent.value = R.string.err_enter_title
             return false
@@ -197,7 +197,7 @@ class SaveReminderViewModel(
         clearData()
     }
 
-    private fun clearData() {
+    fun clearData() {
         _selectedAddress.value = null
         _currentAddress.value = null
         _reminder.value = Reminder()
