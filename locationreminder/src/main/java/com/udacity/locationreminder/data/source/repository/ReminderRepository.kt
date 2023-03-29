@@ -3,7 +3,6 @@ package com.udacity.locationreminder.data.source.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.udacity.locationreminder.data.domain.Reminder
-import com.udacity.locationreminder.data.domain.Result
 import com.udacity.locationreminder.data.domain.asDatabase
 import com.udacity.locationreminder.data.source.local.RemindersDao
 import com.udacity.locationreminder.data.source.local.asDomain

@@ -2,7 +2,7 @@ package com.udacity.locationreminder.data.source
 
 import androidx.lifecycle.LiveData
 import com.udacity.locationreminder.data.domain.Reminder
-import com.udacity.locationreminder.data.domain.Result
+import com.udacity.locationreminder.data.source.repository.Result
 import com.udacity.locationreminder.data.source.repository.ReminderRepository
 
 class FakeReminderRepository : ReminderRepository {

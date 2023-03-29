@@ -30,7 +30,7 @@ class RemindersListAdapter(private val onClickListener: OnClickListener) :
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemReminderBinding.inflate(layoutInflater)
+                val binding = ItemReminderBinding.inflate(layoutInflater,parent,false)
                 return ViewHolder(binding)
             }
         }

@@ -1,4 +1,4 @@
-package com.udacity.locationreminder.data.domain
+package com.udacity.locationreminder.data.source.repository
 
 sealed class Result<out R> {
 

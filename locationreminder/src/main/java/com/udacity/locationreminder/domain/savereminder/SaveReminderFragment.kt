@@ -46,10 +46,6 @@ class SaveReminderFragment : BaseFragment() {
             checkDeviceLocationSettings()
         }
 
-        viewModel.navigateReminderListEvent.observe(viewLifecycleOwner) {
-            findNavController().navigate(SaveReminderFragmentDirections.actionSaveReminderDestinationToRemindersDestination())
-        }
-
         return binding.root
 
     }

@@ -2,9 +2,8 @@ package com.udacity.locationreminder.domain.savereminder
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.app.PendingIntent
-import android.content.Intent
-import android.os.Build
+import android.location.Geocoder
+import android.location.Location
 import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,16 +12,13 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.*
 import com.udacity.locationreminder.base.BaseViewModel
 import com.udacity.locationreminder.data.source.repository.ReminderRepository
-import com.udacity.locationreminder.data.domain.Location
 import com.udacity.locationreminder.data.domain.Reminder
-import com.udacity.locationreminder.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import com.udacity.locationreminder.R
-import com.udacity.locationreminder.geofence.GeofenceBroadcastReceiver
-import com.udacity.locationreminder.geofence.GeofencingConstants
-import com.udacity.locationreminder.geofence.GeofencingConstants.ACTION_GEOFENCE_EVENT
-import com.udacity.locationreminder.geofence.GeofencingConstants.GEOFENCE_REQUEST_CODE
-
+import com.udacity.locationreminder.base.NavigationCommand
+import com.udacity.locationreminder.data.domain.Address
+import kotlinx.coroutines.Dispatchers
+import java.util.*
 
 class SaveReminderViewModel(
     private val application: Application,
@@ -32,59 +28,23 @@ class SaveReminderViewModel(
     private val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(application)
     private var locationCallback: LocationCallback? = null
-    private var geofencingClient: GeofencingClient
-    private var geofencePendingIntent: PendingIntent
 
     var reminder = MutableLiveData(Reminder())
 
-    val locationStr: LiveData<String> = Transformations.map(reminder) {
-        it?.location?.let { location ->
-            application.getString(R.string.lat_long_snippet, location.latitude, location.longitude)
-        } ?: ""
-    }
+    private val _selectedAddress = MutableLiveData<Address?>()
+    val selectedAddress:LiveData<Address?> = _selectedAddress
+
     val isSaveActive: LiveData<Boolean> = Transformations.map(reminder) {
-        it?.location != null
-    }
-
-    private val _showCurrentLocationEvent = SingleLiveEvent<Location>()
-    val showCurrentLocationEvent = _showCurrentLocationEvent
-
-    private val _navigateGeocodeDetailEvent = SingleLiveEvent<Boolean>()
-    val navigateGeocodeDetailEvent: LiveData<Boolean> = _navigateGeocodeDetailEvent
-
-    private val _navigateReminderListEvent = SingleLiveEvent<Boolean>()
-    val navigateReminderListEvent: LiveData<Boolean> = _navigateReminderListEvent
-
-
-    init {
-        val flag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.FLAG_MUTABLE
-        } else {
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        }
-        val intent = Intent(application, GeofenceBroadcastReceiver::class.java)
-        intent.action = ACTION_GEOFENCE_EVENT
-        geofencePendingIntent = PendingIntent.getBroadcast(
-            application,
-            GEOFENCE_REQUEST_CODE,
-            intent,
-            flag
-        )
-
-        geofencingClient = LocationServices.getGeofencingClient(application)
-    }
-
-    fun getCurrentLocation() {
-        initFusedLocationClient()
+        it?.latitude != 0.0 && it?.longitude != 0.0
     }
 
     @SuppressLint("MissingPermission")
-    private fun initFusedLocationClient() {
+    fun initFusedLocationClient() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
                 locationResult.lastLocation?.let {
-                    showCurrentLocation(Location(it.latitude, it.longitude))
+                    getGeoCodeLocation(it)
                     fusedLocationClient.removeLocationUpdates(this)
                     locationCallback = null
                 }
@@ -100,56 +60,55 @@ class SaveReminderViewModel(
         )
     }
 
-    private fun showCurrentLocation(latLng: Location) {
-        viewModelScope.launch {
-            _showCurrentLocationEvent.value = latLng
+    fun getGeoCodeLocation(location: Location) {
+        val geocoder = Geocoder(application, Locale.getDefault())
+        viewModelScope.launch(Dispatchers.IO) {
+            @Suppress("DEPRECATION")
+            val address = geocoder.getFromLocation(
+                location.latitude,
+                location.longitude,
+                1
+            )?.map {
+                Address(
+                    it.thoroughfare,
+                    it.subThoroughfare,
+                    it.locality,
+                    it.adminArea,
+                    it.postalCode,
+                    location,
+                )
+            }?.first()
+            setAddress(address)
         }
     }
 
-    fun getGeocodeLocationInfo(location: Location) {
-        reminder.value = reminder.value?.copy(location = location)
+    private fun setAddress(address: Address?) {
+        viewModelScope.launch {
+            address?.let {
+                _selectedAddress.value = it
+                reminder.value =
+                    reminder.value?.copy(
+                        latitude = it.location.latitude,
+                        longitude = it.location.longitude,
+                        locationSnippet = it.getSnippet()
+                    )
+            }
+        }
     }
 
     fun clearGeofence() {
-        reminder.value = reminder.value?.copy(location = null)
+        reminder.value = reminder.value?.copy(latitude = 0.0, longitude = 0.0)
     }
 
     fun saveLocation() {
-        _navigateGeocodeDetailEvent.value = true
+        navigationCommandEvent.value = NavigationCommand.Back
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        clearData()
-    }
-
-    fun saveReminder() {
-        val reminder = reminder.value
-        if (reminder != null) {
-            if (reminder.location == null) {
-                showErrorMessageEvent.value = "Please select a location"
-                return
-            } else if (reminder.title == null) {
-                showErrorMessageEvent.value = "Please choose a title for your reminder"
-                return
-            }
-        } else {
-            showErrorMessageEvent.value = "Please complete required field"
-            return
-        }
-        viewModelScope.launch {
-            reminderRepository.saveReminder(reminder)
-            _navigateReminderListEvent.value = true
-            clearData()
-        }
-    }
-
     fun validateAndSaveReminder() {
         val reminder = reminder.value
         if (reminder != null && validateEnteredData(reminder))
-        if (validateEnteredData(reminder)) {
-            saveReminder(reminder)
-        }
+            if (validateEnteredData(reminder)) {
+                saveReminder(reminder)
+            }
     }
 
     private fun saveReminder(reminder: Reminder) {
@@ -159,59 +118,34 @@ class SaveReminderViewModel(
             clearData()
             showLoading.value = false
             showToastEvent.value = application.getString(R.string.reminder_saved)
-            _navigateReminderListEvent.value = true
+            navigationCommandEvent.value = NavigationCommand.Back
         }
     }
 
-    private fun validateEnteredData(reminder:Reminder): Boolean {
+    private fun validateEnteredData(reminder: Reminder): Boolean {
         if (reminder.title.isNullOrEmpty()) {
             showSnackBarIntEvent.value = R.string.err_enter_title
             return false
         }
 
-        if (reminder.location == null) {
+        if (reminder.latitude == 0.0) {
             showSnackBarIntEvent.value = R.string.err_select_location
             return false
         }
         return true
     }
 
-    @SuppressLint("MissingPermission")
-    fun addGeofence(location: Location) {
-        val geofence = Geofence.Builder().apply {
-            setRequestId("")
-            setCircularRegion(
-                location.latitude,
-                location.longitude,
-                GeofencingConstants.GEOFENCE_RADIUS_IN_METERS
-            )
-            setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
-        }.build()
-
-        val geofenceRequest = GeofencingRequest.Builder().apply {
-            addGeofence(geofence)
-            setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
-        }.build()
-
-        geofencingClient.removeGeofences(geofencePendingIntent).run {
-            addOnCompleteListener {
-                geofencingClient.addGeofences(geofenceRequest, geofencePendingIntent).run {
-                    addOnCompleteListener {
-
-                    }
-                }
-            }
-        }
-    }
-
-    fun removeGeofences() {
-        geofencingClient.removeGeofences(geofencePendingIntent)
+    override fun onCleared() {
+        super.onCleared()
+        clearData()
     }
 
     private fun clearData() {
+        _selectedAddress.value = null
         reminder.value = null
         if (locationCallback != null) {
             fusedLocationClient.removeLocationUpdates(locationCallback!!)
+            locationCallback = null
         }
     }
 }
