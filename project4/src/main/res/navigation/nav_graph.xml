@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/launch_destination">
+    <fragment
+        android:id="@+id/launch_destination"
+        android:name="com.udacity.project4.domain.launch.LaunchWithAuthFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_launch">
+        <action
+            android:id="@+id/action_open_reminders"
+            app:destination="@id/reminders_destination"
+            app:popUpTo="@id/launch_destination"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reminders_destination"
+        android:name="com.udacity.project4.domain.reminderlist.ReminderListFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_reminders_list">
+        <action
+            android:id="@+id/action_open_detail"
+            app:destination="@id/reminder_detail_destination" />
+        <action
+            android:id="@+id/action_save_reminder"
+            app:destination="@id/save_reminder_destination" />
+    </fragment>
+    <fragment
+        android:id="@+id/reminder_detail_destination"
+        android:name="com.udacity.project4.domain.reminderdetail.ReminderDetailFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_reminder_detail">
+        <argument
+            android:name="reminderId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/save_reminder_destination"
+        android:name="com.udacity.project4.domain.savereminder.SaveReminderFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_save_reminder">
+        <action
+            android:id="@+id/action_select_location"
+            app:destination="@id/select_location_destination" />
+        <action
+            android:id="@+id/action_save_reminder_destination_to_reminders_destination"
+            app:destination="@id/reminders_destination"
+            app:popUpTo="@id/reminders_destination"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/select_location_destination"
+        android:name="com.udacity.project4.domain.savereminder.SelectLocationFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_select_location">
+        <action
+            android:id="@+id/action_select_location_destination_to_save_reminder_destination"
+            app:destination="@id/save_reminder_destination"
+            app:popUpTo="@id/save_reminder_destination"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_launch_destination"
+        app:destination="@id/launch_destination"
+        app:popUpTo="@id/reminders_destination"
+        app:popUpToInclusive="true" />
+</navigation>
