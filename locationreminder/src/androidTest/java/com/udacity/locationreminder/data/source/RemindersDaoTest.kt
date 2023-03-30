@@ -1,4 +1,4 @@
-package com.udacity.locationreminder.data.source.local
+package com.udacity.locationreminder.data.source
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
@@ -8,6 +8,7 @@ import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import com.udacity.locationreminder.data.domain.Reminder
 import com.udacity.locationreminder.data.domain.asDatabase
+import com.udacity.locationreminder.data.source.local.RemindersDatabase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After

@@ -6,8 +6,11 @@ import com.udacity.locationreminder.data.domain.Reminder
 import com.udacity.locationreminder.data.source.repository.ReminderRepository
 import kotlinx.coroutines.runBlocking
 import com.udacity.locationreminder.data.source.repository.Result
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import java.lang.Exception
 
+@ExperimentalCoroutinesApi
 class FakeReminderRepository : ReminderRepository {
 
     var fakeReminders = mutableListOf<Reminder>()
@@ -21,7 +24,7 @@ class FakeReminderRepository : ReminderRepository {
     }
 
     override fun observeReminders(): LiveData<List<Reminder>?> {
-        runBlocking { refreshTasks() }
+        runBlocking { refreshReminders() }
         return observableTasks
     }
 
@@ -33,6 +36,9 @@ class FakeReminderRepository : ReminderRepository {
     }
 
     override suspend fun saveReminder(reminder: Reminder) {
+        if (shouldReturnError) {
+            return
+        }
         fakeReminders.add(reminder)
     }
 
@@ -49,7 +55,13 @@ class FakeReminderRepository : ReminderRepository {
         fakeReminders.clear()
     }
 
-    private fun refreshTasks() {
-        observableTasks.value = fakeReminders
+    private fun refreshReminders() = runTest{
+        val result = getReminders()
+        if (result is Result.Success) {
+            observableTasks.value = result.data
+        }else {
+            observableTasks.value = null
+        }
+
     }
 }

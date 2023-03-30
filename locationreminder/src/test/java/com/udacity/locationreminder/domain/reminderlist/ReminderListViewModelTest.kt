@@ -81,5 +81,20 @@ class ReminderListViewModelTest : AutoCloseKoinTest() {
         assertThat(reminderListViewModel.showNoData.getOrAwaitValue()).isEqualTo(false)
     }
 
+    @Test
+    fun test() = runTest {
+        //GIVEN two task for list fragment
+        (fakeReminderRepository as FakeReminderRepository).setReturnError(true)
+        val reminder1 = Reminder("TITLE1")
+        val reminder2 = Reminder("TITLE2")
+        fakeReminderRepository.saveReminder(reminder1)
+        fakeReminderRepository.saveReminder(reminder2)
+
+        reminderListViewModel.reminders.getOrAwaitValue()
+
+        assertThat(reminderListViewModel.showNoData.getOrAwaitValue()).isEqualTo(true)
+
+    }
+
 
 }

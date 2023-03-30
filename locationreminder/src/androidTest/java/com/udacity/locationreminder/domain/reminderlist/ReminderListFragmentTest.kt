@@ -30,7 +30,6 @@ import org.koin.dsl.module
 import org.koin.test.AutoCloseKoinTest
 import org.mockito.Mockito
 import org.koin.test.get
-import org.koin.test.inject
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
@@ -74,9 +73,6 @@ class ReminderListFragmentTest : AutoCloseKoinTest() {
 
         val mockNavController = Mockito.mock(NavController::class.java)
 
-        scenario.onFragment {
-
-        }
         scenario.onFragment {
             Navigation.setViewNavController(it.view!!, mockNavController)
         }
