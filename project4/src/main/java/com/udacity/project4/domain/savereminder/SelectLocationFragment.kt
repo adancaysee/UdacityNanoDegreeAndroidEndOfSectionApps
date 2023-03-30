@@ -3,6 +3,7 @@ package com.udacity.project4.domain.savereminder
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -18,11 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.Circle
-import com.google.android.gms.maps.model.CircleOptions
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.android.material.snackbar.Snackbar
 import com.udacity.project4.BuildConfig
 import com.udacity.project4.R
@@ -32,6 +29,7 @@ import com.udacity.project4.data.domain.getLocation
 import com.udacity.project4.databinding.FragmentSelectLocationBinding
 import com.udacity.project4.util.hasPermission
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 class SelectLocationFragment : BaseFragment(), OnMapReadyCallback, MenuProvider {
 
@@ -100,6 +98,20 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback, MenuProvider 
         mMap.setOnMapClickListener {
             clearMap()
             viewModel.getGeoCodeLocation(it.getLocation())
+        }
+        setMapStyle(mMap)
+    }
+
+    private fun setMapStyle(map: GoogleMap) {
+        try {
+            map.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(
+                    requireContext(),
+                    R.raw.map_style
+                )
+            )
+        } catch (e: Resources.NotFoundException) {
+            Timber.e("Can't find style. Error:")
         }
     }
 

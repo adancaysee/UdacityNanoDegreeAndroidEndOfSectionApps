@@ -8,4 +8,6 @@
 
     <color name="geofence_circle_fill_color">#800D72C1</color>
 
+    <color name="test">#ff4ff6</color>
+
 </resources>
