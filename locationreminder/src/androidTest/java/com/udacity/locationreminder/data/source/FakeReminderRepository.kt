@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.udacity.locationreminder.data.domain.Reminder
 import com.udacity.locationreminder.data.source.repository.ReminderRepository
-import kotlinx.coroutines.runBlocking
 import com.udacity.locationreminder.data.source.repository.Result
 import java.lang.Exception
 
@@ -21,7 +20,7 @@ class FakeReminderRepository : ReminderRepository {
     }
 
     override fun observeReminders(): LiveData<List<Reminder>?> {
-        runBlocking { refreshTasks() }
+        refreshTasks()
         return observableTasks
     }
 

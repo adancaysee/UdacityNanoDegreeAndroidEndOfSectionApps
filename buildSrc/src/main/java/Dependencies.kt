@@ -67,6 +67,7 @@ object Libraries {
     const val gmsPlayServicesAuth = "com.google.android.gms:play-services-auth:20.4.1"
     const val playServicesLocation = "com.google.android.gms:play-services-location:21.0.1"
 
+    const val espressoIdling = "androidx.test.espresso:espresso-idling-resource:3.5.1"
 }
 
 object TestLibraries {

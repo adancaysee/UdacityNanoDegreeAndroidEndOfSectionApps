@@ -21,12 +21,12 @@ import org.junit.runner.RunWith
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.dsl.module
-import org.koin.test.KoinTest
+import org.koin.test.AutoCloseKoinTest
 import org.koin.test.get
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
-class ReminderListViewModelTest : KoinTest {
+class ReminderListViewModelTest : AutoCloseKoinTest() {
 
     private lateinit var reminderListViewModel: ReminderListViewModel
     private lateinit var appContext: Application

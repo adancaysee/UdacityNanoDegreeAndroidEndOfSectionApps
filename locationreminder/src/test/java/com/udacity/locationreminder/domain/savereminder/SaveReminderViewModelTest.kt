@@ -13,7 +13,6 @@ import com.udacity.locationreminder.util.MainDispatcherRule
 import com.udacity.locationreminder.util.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -22,12 +21,12 @@ import org.junit.runner.RunWith
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.dsl.module
-import org.koin.test.KoinTest
+import org.koin.test.AutoCloseKoinTest
 import org.koin.test.get
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
-class SaveReminderViewModelTest : KoinTest {
+class SaveReminderViewModelTest : AutoCloseKoinTest() {
     private lateinit var saveReminderViewModel: SaveReminderViewModel
     private lateinit var appContext: Application
 
@@ -57,11 +56,6 @@ class SaveReminderViewModelTest : KoinTest {
         runBlocking {
             fakeReminderRepository.deleteAllReminders()
         }
-    }
-
-    @After
-    fun tearDown() {
-        stopKoin()
     }
 
     @Test

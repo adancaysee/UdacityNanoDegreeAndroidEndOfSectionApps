@@ -86,6 +86,7 @@ dependencies {
     testImplementation(TestLibraries.koinTest)
     testImplementation(TestLibraries.koinTestJUnit4)
 
+    implementation(Libraries.espressoIdling)
     androidTestImplementation(TestLibraries.androidXJunitKtx)
     androidTestImplementation(TestLibraries.androidXArchCoreTesting)
     androidTestImplementation(TestLibraries.espressoCore)
