@@ -14,13 +14,21 @@
       },
       "oauth_client": [
         {
-          "client_id": "405259834707-5npi8nc8n7buf39fu105ris1533n5hth.apps.googleusercontent.com",
+          "client_id": "405259834707-arftu0k0obp60hs10caacdg7lk2e2egl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.udacity.locationreminder",
+            "certificate_hash": "19cb18521d7a11f194646f3adab3534325daf064"
+          }
+        },
+        {
+          "client_id": "405259834707-co0k538ommn4silas1j9hlprva9d0qrn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyChd8M3Ht0dqJIR0KdbxP0q-vMp-2n7lrE"
+          "current_key": "AIzaSyCfmXZMQwmL7NzVqWSjpOiWPpIJxzx5b4A"
         }
       ],
       "services": {
