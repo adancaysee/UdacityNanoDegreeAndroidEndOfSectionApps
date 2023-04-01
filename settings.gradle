@@ -13,10 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "UdacityNanoDegreeAndroidEndOfSectionApps"
-include ':app'
-include ':shoestore'
 include ':asteroidradar'
 include ':loadapp'
 include ':locationreminder'
 include ':politicalpreparedness'
-include ':project4'

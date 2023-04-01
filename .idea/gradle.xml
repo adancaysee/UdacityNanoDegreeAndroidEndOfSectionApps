@@ -10,14 +10,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/asteroidradar" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/loadapp" />
             <option value="$PROJECT_DIR$/locationreminder" />
             <option value="$PROJECT_DIR$/politicalpreparedness" />
-            <option value="$PROJECT_DIR$/project4" />
-            <option value="$PROJECT_DIR$/shoestore" />
           </set>
         </option>
       </GradleProjectSettings>
